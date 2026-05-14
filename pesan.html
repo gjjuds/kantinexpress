@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pesan Makanan - Kantin Express</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="shared.css">
+    <style>
+        /* ===== Page Header ===== */
+        .page-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem 0;
+            margin-top: 80px;
+            text-align: center;
+        }
+        .page-title { font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .page-subtitle { font-size: 1.1rem; opacity: 0.9; }
+
+        /* ===== Main Content ===== */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* Search */
+        .search-container {
+            background: white;
+            padding: 1.5rem 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            margin-bottom: 2.5rem;
+        }
+        .search-box {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .search-input {
+            width: 100%;
+            padding: 1rem 1.5rem 1rem 3.5rem;
+            border: 2px solid #e1e8ff;
+            border-radius: 50px;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+            background: #f8faff;
+            font-family: inherit;
+        }
+        .search-input:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102,126,234,0.1);
+            background: white;
+        }
+        .search-icon {
+            position: absolute;
+            left: 1.3rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #667eea;
+            font-size: 1.1rem;
+        }
+
+        /* Warung Grid */
+        .warung-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+        .warung-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .warung-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(102,126,234,0.18);
+        }
+        .warung-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .warung-card:hover .warung-image { transform: scale(1.05); }
+        .warung-info { padding: 1.4rem; }
+        .warung-name { font-size: 1.3rem; font-weight: 600; color: #333; margin-bottom: 0.3rem; }
+        .warung-desc { color: #666; margin-bottom: 1rem; font-size: 0.92rem; }
+        .warung-stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        .rating {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: #f59e0b;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+        .orders {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.25rem 0.85rem;
+            border-radius: 20px;
+            font-size: 0.82rem;
+            font-weight: 500;
+        }
+        .warung-action {
+            width: 100%;
+            padding: 0.9rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 0.98rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+        .warung-action:hover {
+            background: linear-gradient(135deg, #5a67d8, #6b46c1);
+            transform: translateY(-2px);
+        }
+
+        /* ===== Floating Cart Button (top-right of page area) ===== */
+        .cart-float {
+            position: fixed;
+            top: 100px;
+            right: 2rem;
+            z-index: 900;
+            background: linear-gradient(135deg, #ff6b6b, #ffd93d);
+            color: white;
+            border: none;
+            padding: 0.85rem 1.3rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(255,107,107,0.4);
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-family: inherit;
+        }
+        .cart-float:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(255,107,107,0.55);
+        }
+        .cart-float .cart-count {
+            background: white;
+            color: #ff6b6b;
+            border-radius: 50%;
+            min-width: 24px;
+            height: 24px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+
+        /* History Float Button (below cart) */
+        .history-float {
+            position: fixed;
+            top: 158px;
+            right: 2rem;
+            z-index: 900;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 0.85rem 1.3rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(102,126,234,0.4);
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-family: inherit;
+        }
+        .history-float:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(102,126,234,0.55);
+        }
+        .history-float .history-count {
+            background: white;
+            color: #667eea;
+            border-radius: 50%;
+            min-width: 24px;
+            height: 24px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+
+        /* History Tabs */
+        .history-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            background: #f8faff;
+            padding: 0.4rem;
+            border-radius: 14px;
+        }
+        .history-tab {
+            flex: 1;
+            background: transparent;
+            border: none;
+            padding: 0.75rem 1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            color: #888;
+            transition: all 0.25s;
+            font-family: inherit;
+            font-size: 0.92rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+        }
+        .history-tab:hover { color: #667eea; }
+        .history-tab.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            box-shadow: 0 6px 15px rgba(102,126,234,0.3);
+        }
+        .history-tab .badge-num {
+            background: rgba(255,255,255,0.3);
+            padding: 0.05rem 0.5rem;
+            border-radius: 10px;
+            font-size: 0.78rem;
+        }
+        .history-tab:not(.active) .badge-num {
+            background: #e1e8ff;
+            color: #667eea;
+        }
+
+        /* Order card inside history modal */
+        .history-order-card {
+            background: white;
+            border: 2px solid #e1e8ff;
+            border-radius: 14px;
+            padding: 1rem 1.2rem;
+            margin-bottom: 1rem;
+            transition: all 0.2s;
+        }
+        .history-order-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 8px 20px rgba(102,126,234,0.1);
+        }
+        .history-order-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.6rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .history-order-id {
+            font-weight: 700;
+            color: #667eea;
+            font-size: 1rem;
+        }
+        .history-order-time {
+            font-size: 0.8rem;
+            color: #888;
+        }
+        .history-order-summary {
+            font-size: 0.88rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+        .history-order-total {
+            font-weight: 600;
+            color: #333;
+        }
+        .history-order-total span { color: #667eea; }
+        .history-detail-btn {
+            background: #f0f4ff;
+            color: #667eea;
+            border: none;
+            padding: 0.45rem 0.9rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-family: inherit;
+            transition: all 0.2s;
+            margin-top: 0.5rem;
+        }
+        .history-detail-btn:hover { background: #667eea; color: white; }
+
+        .back-btn {
+            background: #f0f4ff;
+            color: #667eea;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: inherit;
+            margin-bottom: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: all 0.2s;
+        }
+        .back-btn:hover { background: #667eea; color: white; }
+
+        /* ===== Menu Modal ===== */
+        .menu-list {
+            display: grid;
+            gap: 1rem;
+        }
+        .menu-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem;
+            background: #f8faff;
+            border-radius: 14px;
+            border: 2px solid transparent;
+            transition: all 0.2s;
+            align-items: center;
+        }
+        .menu-item:hover { border-color: #e1e8ff; }
+        .menu-item img {
+            width: 80px;
+            height: 80px;
+            border-radius: 12px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+        .menu-item-info { flex: 1; min-width: 0; }
+        .menu-item-name { font-weight: 600; color: #333; margin-bottom: 0.2rem; font-size: 1rem; }
+        .menu-item-price { color: #667eea; font-weight: 600; font-size: 0.95rem; }
+
+        .qty-control {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .qty-btn {
+            width: 32px; height: 32px;
+            border: none;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        .qty-btn:hover { transform: scale(1.1); }
+        .qty-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+        .qty-value {
+            min-width: 28px;
+            text-align: center;
+            font-weight: 600;
+            color: #333;
+        }
+        .add-to-cart-btn {
+            background: linear-gradient(135deg, #00b894, #00a085);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: inherit;
+            white-space: nowrap;
+        }
+        .add-to-cart-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 15px rgba(0,184,148,0.4); }
+        .add-to-cart-btn:disabled { background: #ccc; cursor: not-allowed; }
+
+        @media (max-width: 600px) {
+            .menu-item { flex-wrap: wrap; }
+            .menu-item img { width: 60px; height: 60px; }
+        }
+
+        /* ===== Cart Modal ===== */
+        .cart-warung-group {
+            background: #f8faff;
+            padding: 1rem 1.2rem;
+            border-radius: 14px;
+            margin-bottom: 1rem;
+            border-left: 4px solid #667eea;
+        }
+        .cart-warung-name {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 0.7rem;
+            font-size: 0.95rem;
+        }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px dashed #d8e0f5;
+        }
+        .cart-item:last-child { border-bottom: none; }
+        .cart-item-info { flex: 1; }
+        .cart-item-name { font-weight: 500; font-size: 0.92rem; }
+        .cart-item-meta { font-size: 0.82rem; color: #888; }
+        .cart-item-actions { display: flex; align-items: center; gap: 0.6rem; }
+        .cart-item-price { font-weight: 600; color: #333; font-size: 0.92rem; }
+        .cart-remove {
+            background: #ffe5e8;
+            color: #d63031;
+            border: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .cart-remove:hover { background: #d63031; color: white; }
+
+        .cart-summary {
+            background: linear-gradient(135deg, #f0f4ff, #faf5ff);
+            padding: 1.2rem;
+            border-radius: 14px;
+            margin-top: 1rem;
+        }
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.4rem 0;
+            color: #555;
+        }
+        .summary-row.total {
+            border-top: 2px dashed #667eea;
+            margin-top: 0.5rem;
+            padding-top: 0.8rem;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #333;
+        }
+        .summary-row.total span:last-child { color: #667eea; }
+
+        .empty-state {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: #999;
+        }
+        .empty-state i {
+            font-size: 3rem;
+            color: #d8e0f5;
+            margin-bottom: 1rem;
+        }
+
+        /* ===== QRIS Modal ===== */
+        .qris-container {
+            text-align: center;
+        }
+        .qris-image {
+            width: 250px;
+            height: 250px;
+            margin: 0 auto 1rem;
+            padding: 1rem;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 4px solid #667eea;
+        }
+        .qris-info {
+            background: #f8faff;
+            padding: 1rem 1.2rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+        }
+        .qris-amount {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #667eea;
+            margin: 0.5rem 0;
+        }
+
+        /* ===== Status Tracker ===== */
+        .status-tracker { margin-top: 1rem; }
+        .status-step {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.8rem 1rem;
+            margin-bottom: 0.6rem;
+            background: #f8faff;
+            border-radius: 12px;
+            border-left: 4px solid #d8e0f5;
+            transition: all 0.3s;
+        }
+        .status-step.done {
+            background: linear-gradient(90deg, #d4edda, #c8e6c9);
+            border-left-color: #00b894;
+        }
+        .status-step.current {
+            background: linear-gradient(90deg, #fff3cd, #ffeaa7);
+            border-left-color: #f59e0b;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+        .status-icon {
+            width: 36px; height: 36px;
+            border-radius: 50%;
+            background: #d8e0f5;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .status-step.done .status-icon { background: #00b894; }
+        .status-step.current .status-icon { background: #f59e0b; }
+        .status-label { font-weight: 500; }
+
+        @media (max-width: 768px) {
+            .main-content { padding: 2rem 1rem; }
+            .page-title { font-size: 2rem; }
+            .cart-float { top: 90px; right: 1rem; padding: 0.7rem 1rem; }
+            .history-float { top: 145px; right: 1rem; padding: 0.7rem 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-utensils"></i>
+                Kantin Express
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link"><i class="fas fa-home"></i> <span>Home</span></a></li>
+                <li><a href="pesan.html" class="nav-link"><i class="fas fa-shopping-bag"></i> <span>Pesan</span></a></li>
+                <li><span class="user-info"><i class="fas fa-user-circle"></i> <span id="userName">Customer</span></span></li>
+                <li><button class="nav-link" onclick="logout()"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <h1 class="page-title">Pilih Warung Makanan</h1>
+        <p class="page-subtitle">Temukan warung favoritmu dan pesan sekarang!</p>
+    </section>
+
+    <!-- Floating Cart Button -->
+    <button class="cart-float" onclick="openCart()">
+        <i class="fas fa-shopping-cart"></i> Keranjang
+        <span class="cart-count" id="cartCount">0</span>
+    </button>
+
+    <!-- Floating History Button -->
+    <button class="history-float" onclick="openHistory()">
+        <i class="fas fa-receipt"></i> Riwayat Pesanan
+        <span class="history-count" id="historyCount">0</span>
+    </button>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="search-container">
+            <div class="search-box">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-input" placeholder="Cari warung makanan..." id="searchInput">
+            </div>
+        </div>
+        <div class="warung-grid" id="warungGrid"></div>
+    </main>
+
+    <!-- ===== Modal: Menu Warung ===== -->
+    <div class="modal-overlay" id="menuModal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h2 id="menuModalTitle">Menu Warung</h2>
+                <button class="modal-close" onclick="closeModal('menuModal')"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="menu-list" id="menuList"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== Modal: Keranjang ===== -->
+    <div class="modal-overlay" id="cartModal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h2><i class="fas fa-shopping-cart"></i> Keranjang Saya</h2>
+                <button class="modal-close" onclick="closeModal('cartModal')"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div id="cartContent"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== Modal: Form Pemesanan ===== -->
+    <div class="modal-overlay" id="orderFormModal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h2><i class="fas fa-clipboard-list"></i> Form Pemesanan</h2>
+                <button class="modal-close" onclick="closeModal('orderFormModal')"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <form id="orderForm">
+                    <div class="form-group">
+                        <label>Nama Pemesan</label>
+                        <input type="text" class="form-input" id="formNama" required>
+                    </div>
+                    <div class="form-group">
+                        <label>No Telepon</label>
+                        <input type="tel" class="form-input" id="formTelp" placeholder="08xxx" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Lokasi Pengantaran</label>
+                        <input type="text" class="form-input" id="formLokasi" placeholder="Contoh: Gedung A Lantai 2" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Catatan (opsional)</label>
+                        <textarea class="form-textarea" id="formNotes" placeholder="Pedas level, tanpa bawang, dll"></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary" style="width: 100%;">
+                        <i class="fas fa-paper-plane"></i> Pesan Sekarang
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== Modal: QRIS Pembayaran ===== -->
+    <div class="modal-overlay" id="qrisModal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h2><i class="fas fa-qrcode"></i> Pembayaran QRIS</h2>
+                <button class="modal-close" onclick="closeModal('qrisModal')"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body qris-container">
+                <div class="qris-info">
+                    <div>Total Pembayaran</div>
+                    <div class="qris-amount" id="qrisAmount">Rp 0</div>
+                    <div style="font-size: 0.85rem; color: #888;">Order ID: <strong id="qrisOrderId">-</strong></div>
+                </div>
+                <img class="qris-image" id="qrisImage" alt="QRIS Code">
+                <p style="color:#666; font-size:0.92rem; margin-bottom: 1.2rem;">
+                    Scan QRIS di atas menggunakan aplikasi mobile banking atau e-wallet Anda.
+                </p>
+                <div style="background:#f0f4ff; padding:1rem; border-radius:12px; color:#555; font-size:0.88rem;">
+                    <i class="fas fa-info-circle" style="color:#667eea;"></i>
+                    Setelah pembayaran, status pesanan dapat dipantau melalui tombol
+                    <strong style="color:#667eea;">Riwayat Pesanan</strong> di kanan layar.
+                </div>
+                <button class="btn-secondary" onclick="closeModal('qrisModal')" style="width:100%; margin-top:1rem;">
+                    <i class="fas fa-check"></i> Tutup
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== Modal: Riwayat Pesanan (with tabs) ===== -->
+    <div class="modal-overlay" id="statusModal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h2><i class="fas fa-receipt"></i> <span id="historyModalTitle">Riwayat Pesanan</span></h2>
+                <button class="modal-close" onclick="closeModal('statusModal')"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div id="statusContent"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        const user = requireRole('customer');
+        if (user) document.getElementById('userName').textContent = user.name;
+
+        /* ---------- Render Warung Grid ---------- */
+        function renderWarung(list) {
+            const grid = document.getElementById('warungGrid');
+            grid.innerHTML = '';
+            if (list.length === 0) {
+                grid.innerHTML = `
+                    <div style="grid-column:1/-1; text-align:center; padding:3rem; color:#888;">
+                        <i class="fas fa-search" style="font-size:3rem; color:#d8e0f5; margin-bottom:1rem;"></i>
+                        <p>Tidak ada warung ditemukan</p>
+                    </div>`;
+                return;
+            }
+            list.forEach(w => {
+                const stars = '★'.repeat(Math.floor(w.rating)) + '☆'.repeat(5 - Math.floor(w.rating));
+                grid.innerHTML += `
+                    <div class="warung-card">
+                        <img src="${w.image}" alt="${w.name}" class="warung-image" onerror="this.src='https://via.placeholder.com/400x200/667eea/ffffff?text=${encodeURIComponent(w.name)}'">
+                        <div class="warung-info">
+                            <h3 class="warung-name">${w.name}</h3>
+                            <p class="warung-desc">${w.desc}</p>
+                            <div class="warung-stats">
+                                <div class="rating">${stars} ${w.rating}</div>
+                                <div class="orders">${w.orders}+ pesanan</div>
+                            </div>
+                            <button class="warung-action" onclick="openMenu(${w.id})">
+                                <i class="fas fa-eye"></i> Lihat Menu
+                            </button>
+                        </div>
+                    </div>`;
+            });
+        }
+
+        document.getElementById('searchInput').addEventListener('input', e => {
+            const q = e.target.value.toLowerCase();
+            const filtered = WARUNG_DATA.filter(w =>
+                w.name.toLowerCase().includes(q) || w.desc.toLowerCase().includes(q)
+            );
+            renderWarung(filtered);
+        });
+
+        /* ---------- Modal helpers ---------- */
+        function openModal(id) { document.getElementById(id).classList.add('active'); }
+        function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+
+        // Close on overlay click
+        document.querySelectorAll('.modal-overlay').forEach(m => {
+            m.addEventListener('click', e => {
+                if (e.target === m) m.classList.remove('active');
+            });
+        });
+
+        /* ---------- Menu Modal ---------- */
+        let menuQty = {}; // { menuId: qty }
+        let currentWarung = null; // reference to the warung whose menu is open
+
+        function openMenu(warungId) {
+            const w = findWarung(warungId);
+            if (!w) return;
+            currentWarung = w;
+            document.getElementById('menuModalTitle').textContent = w.name;
+            menuQty = {};
+            w.menus.forEach(m => menuQty[m.id] = 1);
+
+            const list = document.getElementById('menuList');
+            list.innerHTML = '';
+            w.menus.forEach(m => {
+                list.innerHTML += `
+                    <div class="menu-item">
+                        <img src="${m.image}" alt="${m.name}" onerror="this.src='https://via.placeholder.com/80/667eea/ffffff?text=Menu'">
+                        <div class="menu-item-info">
+                            <div class="menu-item-name">${m.name}</div>
+                            <div class="menu-item-price">${formatRupiah(m.price)}</div>
+                            <div class="qty-control" style="margin-top:0.5rem;">
+                                <button class="qty-btn" onclick="changeQty(${m.id}, -1)">-</button>
+                                <span class="qty-value" id="qty-${m.id}">1</span>
+                                <button class="qty-btn" onclick="changeQty(${m.id}, 1)">+</button>
+                            </div>
+                        </div>
+                        <button class="add-to-cart-btn" onclick="addToCart(${m.id})">
+                            <i class="fas fa-plus"></i> Tambah
+                        </button>
+                    </div>`;
+            });
+            openModal('menuModal');
+        }
+
+        function changeQty(menuId, delta) {
+            menuQty[menuId] = Math.max(1, (menuQty[menuId] || 1) + delta);
+            document.getElementById('qty-' + menuId).textContent = menuQty[menuId];
+        }
+
+        function addToCart(menuId) {
+            if (!currentWarung) return;
+            const menu = currentWarung.menus.find(m => m.id === menuId);
+            if (!menu) return;
+
+            const cart = getCart();
+            const qty = menuQty[menuId] || 1;
+            const existing = cart.find(c => c.id === menuId);
+            if (existing) {
+                existing.qty += qty;
+            } else {
+                cart.push({
+                    id: menu.id,
+                    name: menu.name,
+                    price: menu.price,
+                    image: menu.image,
+                    warungId: currentWarung.id,
+                    warungName: currentWarung.name,
+                    qty: qty
+                });
+            }
+            saveCart(cart);
+            updateCartCount();
+            showToast(`✓ ${menu.name} ditambahkan (${qty}x)`);
+        }
+
+        /* ---------- Cart Modal ---------- */
+        function updateCartCount() {
+            const cart = getCart();
+            const total = cart.reduce((s, c) => s + c.qty, 0);
+            document.getElementById('cartCount').textContent = total;
+        }
+
+        function openCart() {
+            renderCart();
+            openModal('cartModal');
+        }
+
+        function renderCart() {
+            const cart = getCart();
+            const container = document.getElementById('cartContent');
+
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-shopping-basket"></i>
+                        <h3>Keranjang Kosong</h3>
+                        <p>Yuk pilih menu favoritmu!</p>
+                    </div>`;
+                return;
+            }
+
+            // Group by warung
+            const groups = {};
+            cart.forEach(item => {
+                if (!groups[item.warungId]) groups[item.warungId] = { name: item.warungName, items: [] };
+                groups[item.warungId].items.push(item);
+            });
+
+            let html = '';
+            let subtotal = 0;
+            Object.entries(groups).forEach(([wid, g]) => {
+                html += `<div class="cart-warung-group">
+                    <div class="cart-warung-name"><i class="fas fa-store"></i> ${g.name}</div>`;
+                g.items.forEach(item => {
+                    const itemTotal = item.price * item.qty;
+                    subtotal += itemTotal;
+                    html += `
+                        <div class="cart-item">
+                            <div class="cart-item-info">
+                                <div class="cart-item-name">${item.name}</div>
+                                <div class="cart-item-meta">${item.qty}x ${formatRupiah(item.price)}</div>
+                            </div>
+                            <div class="cart-item-actions">
+                                <span class="cart-item-price">${formatRupiah(itemTotal)}</span>
+                                <button class="cart-remove" onclick="removeFromCart(${item.id})" title="Hapus">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>`;
+                });
+                html += `</div>`;
+            });
+
+            const total = subtotal + ONGKIR;
+            html += `
+                <div class="cart-summary">
+                    <div class="summary-row">
+                        <span>Subtotal Item</span>
+                        <span>${formatRupiah(subtotal)}</span>
+                    </div>
+                    <div class="summary-row">
+                        <span><i class="fas fa-motorcycle"></i> Argo Kurir</span>
+                        <span>${formatRupiah(ONGKIR)}</span>
+                    </div>
+                    <div class="summary-row total">
+                        <span>Total</span>
+                        <span>${formatRupiah(total)}</span>
+                    </div>
+                </div>
+                <button class="btn-primary" style="width:100%; margin-top:1rem;" onclick="openOrderForm()">
+                    <i class="fas fa-paper-plane"></i> Pesan Sekarang
+                </button>`;
+            container.innerHTML = html;
+        }
+
+        function removeFromCart(menuId) {
+            let cart = getCart();
+            cart = cart.filter(c => c.id !== menuId);
+            saveCart(cart);
+            updateCartCount();
+            renderCart();
+            showToast('Item dihapus dari keranjang');
+        }
+
+        /* ---------- Order Form ---------- */
+        function openOrderForm() {
+            const cart = getCart();
+            if (cart.length === 0) {
+                showToast('Keranjang kosong!', 'error');
+                return;
+            }
+            document.getElementById('formNama').value = user.name || '';
+            closeModal('cartModal');
+            openModal('orderFormModal');
+        }
+
+        document.getElementById('orderForm').addEventListener('submit', e => {
+            e.preventDefault();
+            const cart = getCart();
+            if (cart.length === 0) return;
+
+            const nama = document.getElementById('formNama').value.trim();
+            const telp = document.getElementById('formTelp').value.trim();
+            const lokasi = document.getElementById('formLokasi').value.trim();
+            const notes = document.getElementById('formNotes').value.trim();
+
+            const subtotal = cart.reduce((s, c) => s + c.price * c.qty, 0);
+            const total = subtotal + ONGKIR;
+            const orderId = 'KE-' + Date.now().toString().slice(-7);
+
+            const newOrder = {
+                id: orderId,
+                customer: { nama, telp, lokasi, notes },
+                items: cart,
+                subtotal: subtotal,
+                ongkir: ONGKIR,
+                total: total,
+                statusByWarung: {}, // { warungId: statusIndex } -- per-tenant status
+                kurirStatus: 0, // 0 = not picked up, 1 = picked up, 2 = delivered
+                createdAt: new Date().toISOString(),
+                createdBy: user.username
+            };
+
+            // Initialize per-warung status to 'Menunggu Konfirmasi'
+            const warungIds = [...new Set(cart.map(c => c.warungId))];
+            warungIds.forEach(wid => newOrder.statusByWarung[wid] = 0);
+
+            const orders = getOrders();
+            orders.push(newOrder);
+            saveOrders(orders);
+
+            // Clear cart
+            saveCart([]);
+            updateCartCount();
+            updateHistoryCount();
+
+            // Show QRIS
+            document.getElementById('qrisAmount').textContent = formatRupiah(total);
+            document.getElementById('qrisOrderId').textContent = orderId;
+            // Use a real QR Code generator (Google Chart-like API) with the order id
+            document.getElementById('qrisImage').src =
+                `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent('QRIS|' + orderId + '|Rp' + total)}`;
+
+            closeModal('orderFormModal');
+            openModal('qrisModal');
+            showToast('Pesanan berhasil dibuat!');
+        });
+
+        /* ---------- Riwayat / History Modal with Tabs ---------- */
+        let historyTab = 'active'; // 'active' | 'past'
+        let historyView = 'list';  // 'list' | 'detail'
+        let historyDetailOrderId = null;
+
+        function getMyOrders() {
+            // Orders created by the current customer, newest first
+            return getOrders()
+                .filter(o => o.createdBy === user.username)
+                .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        }
+
+        function isOrderActive(order) {
+            // Active if any warung not yet at "Siap Pickup" (status < 3) OR kurir hasn't delivered (< 2)
+            const warungIds = Object.keys(order.statusByWarung);
+            const allReady = warungIds.length > 0 && warungIds.every(wid => (order.statusByWarung[wid] ?? 0) >= 3);
+            const delivered = order.kurirStatus >= 2;
+            return !(allReady && delivered);
+        }
+
+        function updateHistoryCount() {
+            const active = getMyOrders().filter(isOrderActive).length;
+            document.getElementById('historyCount').textContent = active;
+        }
+
+        function openHistory() {
+            historyView = 'list';
+            historyTab = 'active';
+            historyDetailOrderId = null;
+            renderHistory();
+            openModal('statusModal');
+        }
+
+        function renderHistory() {
+            const container = document.getElementById('statusContent');
+            const titleEl = document.getElementById('historyModalTitle');
+
+            if (historyView === 'detail' && historyDetailOrderId) {
+                titleEl.textContent = 'Detail Status Pesanan';
+                renderOrderDetail(historyDetailOrderId);
+                return;
+            }
+
+            titleEl.textContent = 'Riwayat Pesanan';
+
+            const mine = getMyOrders();
+            const active = mine.filter(isOrderActive);
+            const past = mine.filter(o => !isOrderActive(o));
+
+            const list = historyTab === 'active' ? active : past;
+
+            let html = `
+                <div class="history-tabs">
+                    <button class="history-tab ${historyTab === 'active' ? 'active' : ''}" onclick="switchHistoryTab('active')">
+                        <i class="fas fa-bolt"></i> Aktif <span class="badge-num">${active.length}</span>
+                    </button>
+                    <button class="history-tab ${historyTab === 'past' ? 'active' : ''}" onclick="switchHistoryTab('past')">
+                        <i class="fas fa-history"></i> Riwayat <span class="badge-num">${past.length}</span>
+                    </button>
+                </div>`;
+
+            if (list.length === 0) {
+                html += `
+                    <div class="empty-state">
+                        <i class="fas ${historyTab === 'active' ? 'fa-clipboard-list' : 'fa-history'}"></i>
+                        <h3>${historyTab === 'active' ? 'Belum Ada Pesanan Aktif' : 'Belum Ada Riwayat'}</h3>
+                        <p>${historyTab === 'active' ? 'Pesanan yang sedang diproses akan tampil di sini.' : 'Pesanan yang sudah selesai akan tersimpan di sini.'}</p>
+                    </div>`;
+                container.innerHTML = html;
+                return;
+            }
+
+            list.forEach(o => {
+                const time = new Date(o.createdAt).toLocaleString('id-ID', {
+                    day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit'
+                });
+                const itemCount = o.items.reduce((s, it) => s + it.qty, 0);
+                const warungs = [...new Set(o.items.map(it => it.warungName))];
+
+                // Determine overall status label & badge class
+                let badgeLabel = '', badgeClass = '';
+                if (o.kurirStatus >= 2) { badgeLabel = 'Selesai'; badgeClass = 'status-selesai'; }
+                else if (o.kurirStatus === 1) { badgeLabel = 'Diantar Kurir'; badgeClass = 'status-pickup'; }
+                else {
+                    const warungIds = Object.keys(o.statusByWarung);
+                    const allReady = warungIds.every(wid => (o.statusByWarung[wid] ?? 0) >= 3);
+                    if (allReady) { badgeLabel = 'Menunggu Kurir'; badgeClass = 'status-siap'; }
+                    else {
+                        const anyProcessing = warungIds.some(wid => (o.statusByWarung[wid] ?? 0) === 2);
+                        const anyAccepted = warungIds.some(wid => (o.statusByWarung[wid] ?? 0) >= 1);
+                        if (anyProcessing) { badgeLabel = 'Diproses'; badgeClass = 'status-diproses'; }
+                        else if (anyAccepted) { badgeLabel = 'Diterima'; badgeClass = 'status-diterima'; }
+                        else { badgeLabel = 'Menunggu Konfirmasi'; badgeClass = 'status-menunggu'; }
+                    }
+                }
+
+                html += `
+                    <div class="history-order-card">
+                        <div class="history-order-head">
+                            <div>
+                                <div class="history-order-id">${o.id}</div>
+                                <div class="history-order-time"><i class="far fa-clock"></i> ${time}</div>
+                            </div>
+                            <span class="status-badge ${badgeClass}">${badgeLabel}</span>
+                        </div>
+                        <div class="history-order-summary">
+                            <i class="fas fa-shopping-bag" style="color:#667eea;"></i>
+                            ${itemCount} item · ${warungs.length} warung (${warungs.join(', ')})
+                        </div>
+                        <div class="history-order-total">
+                            Total: <span>${formatRupiah(o.total)}</span>
+                        </div>
+                        <button class="history-detail-btn" onclick="openOrderDetail('${o.id}')">
+                            <i class="fas fa-eye"></i> Lihat Detail Status
+                        </button>
+                    </div>`;
+            });
+
+            container.innerHTML = html;
+        }
+
+        function switchHistoryTab(tab) {
+            historyTab = tab;
+            renderHistory();
+        }
+
+        function openOrderDetail(orderId) {
+            historyView = 'detail';
+            historyDetailOrderId = orderId;
+            renderHistory();
+        }
+
+        function backToHistoryList() {
+            historyView = 'list';
+            historyDetailOrderId = null;
+            renderHistory();
+        }
+
+        function renderOrderDetail(orderId) {
+            const container = document.getElementById('statusContent');
+            const order = getOrders().find(o => o.id === orderId);
+
+            if (!order) {
+                container.innerHTML = `
+                    <button class="back-btn" onclick="backToHistoryList()"><i class="fas fa-arrow-left"></i> Kembali</button>
+                    <p>Pesanan tidak ditemukan.</p>`;
+                return;
+            }
+
+            // Group items by warung
+            const groups = {};
+            order.items.forEach(it => {
+                if (!groups[it.warungId]) groups[it.warungId] = { name: it.warungName, items: [] };
+                groups[it.warungId].items.push(it);
+            });
+
+            const time = new Date(order.createdAt).toLocaleString('id-ID', {
+                day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit'
+            });
+
+            let html = `
+                <button class="back-btn" onclick="backToHistoryList()">
+                    <i class="fas fa-arrow-left"></i> Kembali ke Daftar
+                </button>
+                <div style="background:#f8faff; padding:1rem 1.2rem; border-radius:12px; margin-bottom:1rem;">
+                    <div style="font-size:0.85rem; color:#888;">Order ID</div>
+                    <div style="font-weight:700; font-size:1.15rem; color:#667eea;">${order.id}</div>
+                    <div style="font-size:0.85rem; color:#888; margin-top:0.3rem;"><i class="far fa-clock"></i> ${time}</div>
+                    <div style="font-size:0.95rem; color:#555; margin-top:0.5rem;">
+                        Total: <strong style="color:#667eea;">${formatRupiah(order.total)}</strong>
+                        (Subtotal ${formatRupiah(order.subtotal)} + Argo ${formatRupiah(order.ongkir)})
+                    </div>
+                </div>`;
+
+            // Per-warung status
+            Object.entries(groups).forEach(([wid, g]) => {
+                const sIdx = order.statusByWarung[wid] || 0;
+                const tenantFlow = ['Menunggu Konfirmasi', 'Diterima', 'Diproses', 'Siap Pick Up'];
+                // Bila kurir sudah mengambil pesanan (kurirStatus >= 1), "Siap Pick Up" dianggap selesai
+                const effectiveSIdx = (sIdx === 3 && order.kurirStatus >= 1) ? 4 : sIdx;
+                html += `
+                    <div class="cart-warung-group" style="margin-bottom:1.2rem;">
+                        <div class="cart-warung-name"><i class="fas fa-store"></i> ${g.name}</div>
+                        <div class="status-tracker">`;
+                tenantFlow.forEach((label, i) => {
+                    let cls = '';
+                    if (i < effectiveSIdx) cls = 'done';
+                    else if (i === effectiveSIdx) cls = 'current';
+                    html += `
+                        <div class="status-step ${cls}">
+                            <div class="status-icon">
+                                <i class="fas ${i < effectiveSIdx ? 'fa-check' : (i === effectiveSIdx ? 'fa-spinner' : 'fa-circle')}"></i>
+                            </div>
+                            <div class="status-label">${label}</div>
+                        </div>`;
+                });
+                html += `</div></div>`;
+            });
+
+            // Kurir Status
+            const kurirLabels = ['Menunggu Kurir', 'Diambil Kurir', 'Selesai (Diantar)'];
+            // Saat sudah selesai (kurirStatus === 2), geser index efektif ke 3 agar label "Selesai" ikut ter-check
+            const effectiveKurir = order.kurirStatus >= 2 ? 3 : order.kurirStatus;
+            html += `
+                <div class="cart-warung-group" style="border-left-color:#ff6b6b;">
+                    <div class="cart-warung-name" style="color:#ff6b6b;"><i class="fas fa-motorcycle"></i> Status Pengantaran</div>
+                    <div class="status-tracker">`;
+            kurirLabels.forEach((label, i) => {
+                let cls = '';
+                if (i < effectiveKurir) cls = 'done';
+                else if (i === effectiveKurir) cls = 'current';
+                html += `
+                    <div class="status-step ${cls}">
+                        <div class="status-icon">
+                            <i class="fas ${i < effectiveKurir ? 'fa-check' : (i === effectiveKurir ? 'fa-spinner' : 'fa-circle')}"></i>
+                        </div>
+                        <div class="status-label">${label}</div>
+                    </div>`;
+            });
+            html += `</div></div>`;
+
+            html += `
+                <button class="btn-secondary" style="width:100%; margin-top:0.5rem;" onclick="renderHistory()">
+                    <i class="fas fa-sync"></i> Refresh Status
+                </button>`;
+
+            container.innerHTML = html;
+        }
+
+        /* ---------- Init ---------- */
+        renderWarung(WARUNG_DATA);
+        updateCartCount();
+        updateHistoryCount();
+
+        // Navbar scroll
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(102, 126, 234, 0.95)';
+            } else {
+                navbar.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+            }
+        });
+
+        // Auto-refresh: history count + open history modal (so tenant updates reflect)
+        setInterval(() => {
+            updateHistoryCount();
+            if (document.getElementById('statusModal').classList.contains('active')) {
+                renderHistory();
+            }
+        }, 4000);
+    </script>
+</body>
+</html>

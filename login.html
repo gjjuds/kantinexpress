@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Kantin Express</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="shared.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="%23ffffff15"><polygon points="0,100 1000,0 1000,100"/></svg>');
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .login-wrapper {
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            max-width: 900px;
+            width: 100%;
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 30px 70px rgba(0,0,0,0.25);
+            animation: slideUp 0.6s ease;
+        }
+
+        .login-brand {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem 2.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-brand::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,215,0,0.15) 0%, transparent 60%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .brand-logo {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+        .brand-logo i { color: #ffd700; margin-right: 0.5rem; }
+
+        .brand-tagline {
+            font-size: 1.05rem;
+            opacity: 0.95;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 2;
+            line-height: 1.6;
+        }
+
+        .demo-creds {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 14px;
+            padding: 1.2rem;
+            position: relative;
+            z-index: 2;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .demo-creds h4 {
+            font-size: 0.95rem;
+            margin-bottom: 0.7rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .demo-creds .cred-row {
+            font-size: 0.85rem;
+            padding: 0.35rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+        }
+        .demo-creds .cred-row:last-child { border-bottom: none; }
+        .demo-creds .cred-role {
+            background: rgba(255,215,0,0.25);
+            padding: 0.1rem 0.6rem;
+            border-radius: 10px;
+            font-weight: 500;
+            font-size: 0.78rem;
+        }
+        .demo-creds code {
+            font-family: monospace;
+            background: rgba(0,0,0,0.2);
+            padding: 0.1rem 0.4rem;
+            border-radius: 5px;
+            font-size: 0.8rem;
+        }
+
+        .login-form-section {
+            padding: 3rem 2.5rem;
+        }
+
+        .login-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 0.4rem;
+        }
+        .login-subtitle {
+            color: #888;
+            margin-bottom: 2rem;
+        }
+
+        .role-selector {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.6rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .role-option {
+            border: 2px solid #e1e8ff;
+            background: #f8faff;
+            padding: 0.8rem 0.4rem;
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .role-option i {
+            font-size: 1.3rem;
+            color: #667eea;
+            margin-bottom: 0.3rem;
+            display: block;
+        }
+
+        .role-option span {
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: #555;
+        }
+
+        .role-option.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102,126,234,0.3);
+        }
+        .role-option.active i,
+        .role-option.active span {
+            color: white;
+        }
+
+        .input-wrapper {
+            position: relative;
+            margin-bottom: 1rem;
+        }
+        .input-wrapper i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #667eea;
+        }
+        .input-wrapper input {
+            width: 100%;
+            padding: 0.85rem 1rem 0.85rem 2.8rem;
+            border: 2px solid #e1e8ff;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: inherit;
+            outline: none;
+            background: #f8faff;
+            transition: all 0.3s;
+        }
+        .input-wrapper input:focus {
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(102,126,234,0.1);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 0.5rem;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102,126,234,0.4);
+        }
+
+        .error-msg {
+            background: #ffe5e8;
+            color: #d63031;
+            padding: 0.7rem 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            display: none;
+        }
+        .error-msg.show { display: block; }
+
+        @media (max-width: 768px) {
+            .login-wrapper { grid-template-columns: 1fr; }
+            .login-brand { padding: 2rem 1.5rem; }
+            .login-form-section { padding: 2rem 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-wrapper">
+        <!-- Brand Section -->
+        <div class="login-brand">
+            <div class="brand-logo">
+                <i class="fas fa-utensils"></i>
+                Kantin Express
+            </div>
+            <p class="brand-tagline">
+                Selamat datang kembali!<br>
+                Masuk sebagai customer, tenant, atau kurir untuk melanjutkan.
+            </p>
+            <!-- <div class="demo-creds">
+                <h4><i class="fas fa-key"></i> Demo Akun</h4>
+                <div class="cred-row">
+                    <span><code>customer</code> / <code>123</code></span>
+                    <span class="cred-role">Customer</span>
+                </div>
+                <div class="cred-row">
+                    <span><code>tenant1</code> / <code>123</code></span>
+                    <span class="cred-role">Tenant</span>
+                </div>
+                <div class="cred-row">
+                    <span><code>kurir</code> / <code>123</code></span>
+                    <span class="cred-role">Kurir</span>
+                </div>
+            </div> -->
+        </div>
+
+        <!-- Form Section -->
+        <div class="login-form-section">
+            <h2 class="login-title">Masuk Akun</h2>
+            <p class="login-subtitle">Pilih peran lalu masukkan kredensial</p>
+
+            <div class="role-selector">
+                <div class="role-option active" data-role="customer">
+                    <i class="fas fa-user"></i>
+                    <span>Customer</span>
+                </div>
+                <div class="role-option" data-role="tenant">
+                    <i class="fas fa-store"></i>
+                    <span>Tenant</span>
+                </div>
+                <div class="role-option" data-role="kurir">
+                    <i class="fas fa-motorcycle"></i>
+                    <span>Kurir</span>
+                </div>
+            </div>
+
+            <form id="loginForm">
+                <div class="error-msg" id="errorMsg"></div>
+
+                <div class="input-wrapper">
+                    <i class="fas fa-user-circle"></i>
+                    <input type="text" id="username" placeholder="Username" autocomplete="off" required>
+                </div>
+                <div class="input-wrapper">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="password" placeholder="Password" required>
+                </div>
+
+                <button type="submit" class="login-btn">
+                    <i class="fas fa-sign-in-alt"></i> Masuk
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        let selectedRole = 'customer';
+
+        // Role selector
+        document.querySelectorAll('.role-option').forEach(opt => {
+            opt.addEventListener('click', () => {
+                document.querySelectorAll('.role-option').forEach(o => o.classList.remove('active'));
+                opt.classList.add('active');
+                selectedRole = opt.dataset.role;
+
+                // Suggest username
+                const userInput = document.getElementById('username');
+                if (selectedRole === 'customer') userInput.placeholder = 'Contoh: customer';
+                if (selectedRole === 'tenant')   userInput.placeholder = 'Contoh: tenant1';
+                if (selectedRole === 'kurir')    userInput.placeholder = 'Contoh: kurir';
+            });
+        });
+
+        // Login submit
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const errorBox = document.getElementById('errorMsg');
+
+            const user = USERS.find(u =>
+                u.username === username &&
+                u.password === password &&
+                u.role === selectedRole
+            );
+
+            if (!user) {
+                errorBox.textContent = 'Username, password, atau peran tidak sesuai.';
+                errorBox.classList.add('show');
+                return;
+            }
+
+            setCurrentUser(user);
+
+            // Redirect by role
+            if (user.role === 'customer') window.location.href = 'index.html';
+            else if (user.role === 'tenant') window.location.href = 'dashboard-tenant.html';
+            else if (user.role === 'kurir') window.location.href = 'dashboard-kurir.html';
+        });
+
+        // Auto-redirect if already logged in
+        const existing = getCurrentUser();
+        if (existing) {
+            if (existing.role === 'customer') window.location.href = 'index.html';
+            else if (existing.role === 'tenant') window.location.href = 'dashboard-tenant.html';
+            else if (existing.role === 'kurir') window.location.href = 'dashboard-kurir.html';
+        }
+    </script>
+</body>
+</html>

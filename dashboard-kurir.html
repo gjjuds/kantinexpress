@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Kurir - Kantin Express</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="shared.css">
+    <style>
+        .page-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2.5rem 0;
+            margin-top: 80px;
+        }
+        .page-header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+        .page-title { font-size: 2rem; font-weight: 700; }
+        .page-subtitle { opacity: 0.9; margin-top: 0.3rem; }
+
+        /* On/Off Toggle */
+        .toggle-wrapper {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            padding: 1.2rem 1.8rem;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            border: 1px solid rgba(255,255,255,0.25);
+        }
+        .toggle-label {
+            font-weight: 600;
+        }
+        .toggle-status {
+            font-size: 0.82rem;
+            opacity: 0.9;
+        }
+        .toggle-switch {
+            position: relative;
+            width: 70px;
+            height: 36px;
+            background: rgba(255,255,255,0.25);
+            border-radius: 36px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .toggle-switch.on { background: #00b894; }
+        .toggle-slider {
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            width: 28px;
+            height: 28px;
+            background: white;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .toggle-switch.on .toggle-slider { transform: translateX(34px); }
+        .toggle-slider i {
+            color: #667eea;
+            font-size: 0.8rem;
+        }
+        .toggle-switch.on .toggle-slider i {
+            color: #00b894;
+        }
+
+        .stats-row {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .stat-card {
+            background: rgba(255,255,255,0.15);
+            padding: 0.8rem 1.2rem;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            min-width: 110px;
+        }
+        .stat-value { font-size: 1.6rem; font-weight: 700; }
+        .stat-label { font-size: 0.82rem; opacity: 0.9; }
+
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2.5rem 2rem;
+        }
+
+        .section-heading {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.4rem;
+            color: #333;
+            font-weight: 600;
+        }
+        .section-heading i { color: #667eea; }
+
+        /* Off State Notice */
+        .off-notice {
+            background: linear-gradient(135deg, #ffe5e8, #fff3cd);
+            border-left: 4px solid #ff6b6b;
+            padding: 1.5rem;
+            border-radius: 14px;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .off-notice i { font-size: 2rem; color: #ff6b6b; }
+        .off-notice h3 { color: #333; margin-bottom: 0.2rem; }
+        .off-notice p { color: #666; font-size: 0.92rem; }
+
+        /* Pickup Cards */
+        .pickup-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 1.5rem;
+        }
+        .pickup-card {
+            background: white;
+            border-radius: 18px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            overflow: hidden;
+            transition: all 0.3s;
+            position: relative;
+        }
+        .pickup-card:hover { transform: translateY(-5px); box-shadow: 0 20px 50px rgba(255,107,107,0.18); }
+        .pickup-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #ff6b6b, #ffd93d);
+        }
+        .pickup-header {
+            padding: 1.2rem 1.5rem;
+            border-bottom: 1px solid #f0f1ff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .pickup-id { font-weight: 700; color: #ff6b6b; font-size: 1.05rem; }
+        .pickup-time { font-size: 0.82rem; color: #888; }
+
+        .pickup-body { padding: 1.2rem 1.5rem; }
+
+        .pickup-customer {
+            background: #f8faff;
+            padding: 1rem 1.2rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            border-left: 4px solid #667eea;
+        }
+        .pickup-customer h4 {
+            color: #667eea;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .pickup-customer div { padding: 0.2rem 0; font-size: 0.92rem; }
+        .pickup-customer i { width: 20px; color: #667eea; }
+
+        .pickup-warungs {
+            background: linear-gradient(135deg, #f0f4ff, #faf5ff);
+            padding: 1rem 1.2rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+        }
+        .pickup-warungs h4 {
+            color: #764ba2;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .warung-pickup-item {
+            padding: 0.5rem 0;
+            border-bottom: 1px dashed #d8e0f5;
+        }
+        .warung-pickup-item:last-child { border-bottom: none; }
+        .warung-pickup-name { font-weight: 600; color: #333; font-size: 0.95rem; }
+        .warung-pickup-items {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 0.2rem;
+            padding-left: 1rem;
+        }
+
+        .pickup-total {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.7rem 1rem;
+            background: #f8faff;
+            border-radius: 10px;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        .pickup-total span:last-child { color: #667eea; }
+
+        .pickup-actions {
+            display: flex;
+            gap: 0.6rem;
+        }
+        .pickup-actions button {
+            flex: 1;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s;
+            font-family: inherit;
+            font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+        }
+        .btn-pickup { background: linear-gradient(135deg, #ff6b6b, #ffd93d); color: white; }
+        .btn-delivered { background: linear-gradient(135deg, #00b894, #00a085); color: white; }
+        .pickup-actions button:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
+        .pickup-actions button:disabled {
+            background: #e1e8ff !important;
+            color: #aaa !important;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .kurir-status-tag {
+            padding: 0.3rem 0.8rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: #999;
+            background: white;
+            border-radius: 18px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        .empty-state i { font-size: 4rem; color: #d8e0f5; margin-bottom: 1rem; }
+        .empty-state h3 { color: #555; margin-bottom: 0.5rem; }
+
+        @media (max-width: 768px) {
+            .main-content { padding: 2rem 1rem; }
+            .pickup-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="dashboard-kurir.html" class="logo">
+                <i class="fas fa-utensils"></i>
+                Kantin Express
+                <span style="font-size:0.7rem; background:#ffd700; color:#333; padding:0.1rem 0.6rem; border-radius:10px; margin-left:0.4rem; vertical-align:middle;">KURIR</span>
+            </a>
+            <ul class="nav-menu">
+                <li><span class="user-info"><i class="fas fa-motorcycle"></i> <span id="kurirName">Kurir</span></span></li>
+                <li><button class="nav-link" onclick="logout()"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="page-header-inner">
+            <div>
+                <h1 class="page-title">Dashboard Kurir</h1>
+                <p class="page-subtitle">Aktifkan status untuk menerima pesanan</p>
+            </div>
+            <div class="toggle-wrapper">
+                <div>
+                    <div class="toggle-label">Status Kurir</div>
+                    <div class="toggle-status" id="toggleStatus">OFFLINE</div>
+                </div>
+                <div class="toggle-switch" id="toggleSwitch" onclick="toggleKurir()">
+                    <div class="toggle-slider"><i class="fas fa-power-off"></i></div>
+                </div>
+            </div>
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="stat-value" id="statReady">0</div>
+                    <div class="stat-label">Siap Pickup</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="statOngoing">0</div>
+                    <div class="stat-label">Sedang Antar</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="statDone">0</div>
+                    <div class="stat-label">Selesai</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main -->
+    <main class="main-content">
+        <div id="contentArea"></div>
+    </main>
+
+    <script src="app.js"></script>
+    <script>
+        const user = requireRole('kurir');
+        if (user) document.getElementById('kurirName').textContent = user.name;
+
+        /* ---------- Toggle On/Off ---------- */
+        function refreshToggleUI() {
+            const status = getKurirStatus();
+            const sw = document.getElementById('toggleSwitch');
+            const lbl = document.getElementById('toggleStatus');
+            if (status === 'on') {
+                sw.classList.add('on');
+                lbl.textContent = 'ONLINE - Siap Menerima';
+            } else {
+                sw.classList.remove('on');
+                lbl.textContent = 'OFFLINE';
+            }
+        }
+
+        function toggleKurir() {
+            const cur = getKurirStatus();
+            const next = cur === 'on' ? 'off' : 'on';
+            setKurirStatus(next);
+            refreshToggleUI();
+            renderPickups();
+            showToast(next === 'on' ? 'Anda online — siap menerima pesanan!' : 'Anda offline');
+        }
+
+        /* ---------- Pickup orders: orders where ALL warungs have status >= 3 (siap pickup) ---------- */
+        function getPickupOrders() {
+            const all = getOrders();
+            return all
+                .filter(o => {
+                    const warungIds = Object.keys(o.statusByWarung);
+                    // Show only when every warung has marked siap pickup (>= 3)
+                    return warungIds.length > 0 && warungIds.every(wid => (o.statusByWarung[wid] ?? 0) >= 3);
+                })
+                .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        }
+
+        function renderPickups() {
+            const isOnline = getKurirStatus() === 'on';
+            const orders = getPickupOrders();
+
+            const ready = orders.filter(o => o.kurirStatus === 0).length;
+            const ongoing = orders.filter(o => o.kurirStatus === 1).length;
+            const done = orders.filter(o => o.kurirStatus === 2).length;
+            document.getElementById('statReady').textContent = ready;
+            document.getElementById('statOngoing').textContent = ongoing;
+            document.getElementById('statDone').textContent = done;
+
+            const container = document.getElementById('contentArea');
+
+            if (!isOnline) {
+                container.innerHTML = `
+                    <div class="off-notice">
+                        <i class="fas fa-power-off"></i>
+                        <div>
+                            <h3>Status Anda OFFLINE</h3>
+                            <p>Aktifkan toggle di atas agar bisa melihat dan menerima pesanan yang siap pickup.</p>
+                        </div>
+                    </div>`;
+                return;
+            }
+
+            // Only show active (not yet delivered) by default — but include ongoing
+            const activeOrders = orders.filter(o => o.kurirStatus < 2);
+
+            let html = `<div class="section-heading"><i class="fas fa-box"></i> Pesanan Siap Pickup</div>`;
+
+            if (activeOrders.length === 0) {
+                html += `
+                    <div class="empty-state">
+                        <i class="fas fa-clipboard-check"></i>
+                        <h3>Belum Ada Pesanan</h3>
+                        <p>Pesanan akan muncul saat tenant menandai status "Siap Pickup".</p>
+                    </div>`;
+                container.innerHTML = html;
+                return;
+            }
+
+            html += `<div class="pickup-grid">`;
+            activeOrders.forEach(o => {
+                const time = new Date(o.createdAt).toLocaleString('id-ID', {
+                    day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit'
+                });
+
+                // Group items by warung
+                const groups = {};
+                o.items.forEach(it => {
+                    if (!groups[it.warungId]) groups[it.warungId] = { name: it.warungName, items: [] };
+                    groups[it.warungId].items.push(it);
+                });
+
+                let warungsHtml = '';
+                Object.values(groups).forEach(g => {
+                    const itemsList = g.items.map(it => `${it.name} (x${it.qty})`).join(', ');
+                    warungsHtml += `
+                        <div class="warung-pickup-item">
+                            <div class="warung-pickup-name"><i class="fas fa-store" style="color:#764ba2;"></i> ${g.name}</div>
+                            <div class="warung-pickup-items">${itemsList}</div>
+                        </div>`;
+                });
+
+                let kurirStatusTag = '';
+                if (o.kurirStatus === 0) kurirStatusTag = '<span class="kurir-status-tag status-siap">Menunggu Diambil</span>';
+                else if (o.kurirStatus === 1) kurirStatusTag = '<span class="kurir-status-tag status-pickup">Sedang Diantar</span>';
+
+                html += `
+                    <div class="pickup-card">
+                        <div class="pickup-header">
+                            <div>
+                                <div class="pickup-id">${o.id}</div>
+                                <div class="pickup-time"><i class="far fa-clock"></i> ${time}</div>
+                            </div>
+                            ${kurirStatusTag}
+                        </div>
+                        <div class="pickup-body">
+                            <div class="pickup-customer">
+                                <h4><i class="fas fa-user"></i> Data Pemesan</h4>
+                                <div><i class="fas fa-user"></i> <strong>${o.customer.nama}</strong></div>
+                                <div><i class="fas fa-phone"></i> ${o.customer.telp}</div>
+                                <div><i class="fas fa-map-marker-alt"></i> ${o.customer.lokasi}</div>
+                                ${o.customer.notes ? `<div><i class="fas fa-sticky-note"></i> <em>${o.customer.notes}</em></div>` : ''}
+                            </div>
+                            <div class="pickup-warungs">
+                                <h4><i class="fas fa-shopping-bag"></i> Pickup Dari</h4>
+                                ${warungsHtml}
+                            </div>
+                            <div class="pickup-total">
+                                <span>Total Pesanan (termasuk argo kurir)</span>
+                                <span>${formatRupiah(o.total)}</span>
+                            </div>
+                            <div class="pickup-actions">
+                                <button class="btn-pickup" onclick="setKurirOrderStatus('${o.id}', 1)" ${o.kurirStatus >= 1 ? 'disabled' : ''}>
+                                    <i class="fas fa-hands"></i> Ambil Pesanan
+                                </button>
+                                <button class="btn-delivered" onclick="setKurirOrderStatus('${o.id}', 2)" ${o.kurirStatus < 1 || o.kurirStatus >= 2 ? 'disabled' : ''}>
+                                    <i class="fas fa-check-circle"></i> Selesai Antar
+                                </button>
+                            </div>
+                        </div>
+                    </div>`;
+            });
+            html += `</div>`;
+            container.innerHTML = html;
+        }
+
+        function setKurirOrderStatus(orderId, newStatus) {
+            const all = getOrders();
+            const o = all.find(x => x.id === orderId);
+            if (!o) return;
+            o.kurirStatus = newStatus;
+            saveOrders(all);
+            renderPickups();
+            showToast(newStatus === 1 ? 'Pesanan berhasil diambil!' : 'Pesanan selesai diantar!');
+        }
+
+        refreshToggleUI();
+        renderPickups();
+        // Auto-refresh every 4s to catch new ready-pickup orders
+        setInterval(renderPickups, 4000);
+
+        // Navbar scroll
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(102, 126, 234, 0.95)';
+            } else {
+                navbar.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+            }
+        });
+    </script>
+</body>
+</html>

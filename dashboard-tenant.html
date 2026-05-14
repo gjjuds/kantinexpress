@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Tenant - Kantin Express</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="shared.css">
+    <style>
+        .page-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem 0;
+            margin-top: 80px;
+        }
+        .page-header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .page-title { font-size: 2rem; font-weight: 700; }
+        .page-subtitle { opacity: 0.9; }
+
+        .stats-row {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .stat-card {
+            background: rgba(255,255,255,0.15);
+            padding: 0.8rem 1.2rem;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            min-width: 110px;
+        }
+        .stat-value { font-size: 1.6rem; font-weight: 700; }
+        .stat-label { font-size: 0.82rem; opacity: 0.9; }
+
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2.5rem 2rem;
+        }
+
+        /* Filter tabs */
+        .filter-tabs {
+            display: flex;
+            gap: 0.6rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        .filter-tab {
+            background: white;
+            border: 2px solid #e1e8ff;
+            padding: 0.6rem 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 500;
+            color: #555;
+            transition: all 0.25s;
+            font-family: inherit;
+            font-size: 0.92rem;
+        }
+        .filter-tab:hover { border-color: #667eea; color: #667eea; }
+        .filter-tab.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-color: #667eea;
+            color: white;
+        }
+
+        /* Order Card */
+        .orders-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 1.5rem;
+        }
+        .order-card {
+            background: white;
+            border-radius: 18px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            overflow: hidden;
+            transition: all 0.3s;
+            position: relative;
+        }
+        .order-card:hover { transform: translateY(-5px); box-shadow: 0 20px 50px rgba(102,126,234,0.18); }
+        .order-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+        .order-header {
+            padding: 1.2rem 1.5rem;
+            border-bottom: 1px solid #f0f1ff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .order-id {
+            font-weight: 700;
+            color: #667eea;
+            font-size: 1.05rem;
+        }
+        .order-time {
+            font-size: 0.82rem;
+            color: #888;
+        }
+        .order-body {
+            padding: 1.2rem 1.5rem;
+        }
+        .order-customer {
+            background: #f8faff;
+            padding: 0.8rem 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        .order-customer div { padding: 0.15rem 0; }
+        .order-customer strong { color: #667eea; }
+        .order-customer i { width: 18px; color: #667eea; }
+        .order-items {
+            margin-bottom: 1rem;
+        }
+        .order-item-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.4rem 0;
+            border-bottom: 1px dashed #e1e8ff;
+            font-size: 0.92rem;
+        }
+        .order-item-row:last-child { border-bottom: none; }
+        .order-total {
+            background: linear-gradient(135deg, #f0f4ff, #faf5ff);
+            padding: 0.7rem 1rem;
+            border-radius: 10px;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+        .order-total span:last-child { color: #667eea; }
+
+        .order-actions {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        .order-actions button {
+            flex: 1;
+            min-width: 110px;
+            padding: 0.7rem;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s;
+            font-family: inherit;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+        }
+        .btn-accept { background: linear-gradient(135deg, #4facfe, #00f2fe); color: white; }
+        .btn-process { background: linear-gradient(135deg, #f6d365, #fda085); color: white; }
+        .btn-ready { background: linear-gradient(135deg, #84fab0, #8fd3f4); color: white; }
+        .btn-done { background: linear-gradient(135deg, #00b894, #00a085); color: white; }
+        .order-actions button:hover { transform: translateY(-2px); box-shadow: 0 6px 15px rgba(0,0,0,0.15); }
+        .order-actions button:disabled {
+            background: #e1e8ff !important;
+            color: #aaa !important;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: #999;
+            background: white;
+            border-radius: 18px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        .empty-state i { font-size: 4rem; color: #d8e0f5; margin-bottom: 1rem; }
+        .empty-state h3 { color: #555; margin-bottom: 0.5rem; }
+
+        @media (max-width: 768px) {
+            .main-content { padding: 2rem 1rem; }
+            .orders-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="dashboard-tenant.html" class="logo">
+                <i class="fas fa-utensils"></i>
+                Kantin Express
+                <span style="font-size:0.7rem; background:#ffd700; color:#333; padding:0.1rem 0.6rem; border-radius:10px; margin-left:0.4rem; vertical-align:middle;">TENANT</span>
+            </a>
+            <ul class="nav-menu">
+                <li><span class="user-info"><i class="fas fa-store"></i> <span id="warungName">Warung</span></span></li>
+                <li><button class="nav-link" onclick="logout()"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="page-header-inner">
+            <div>
+                <h1 class="page-title">Dashboard Tenant</h1>
+                <p class="page-subtitle">Kelola pesanan masuk untuk warung Anda</p>
+            </div>
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="stat-value" id="statMasuk">0</div>
+                    <div class="stat-label">Pesanan Masuk</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="statProses">0</div>
+                    <div class="stat-label">Diproses</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="statSiap">0</div>
+                    <div class="stat-label">Siap Pickup</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main -->
+    <main class="main-content">
+        <div class="filter-tabs">
+            <button class="filter-tab active" data-filter="all">Semua</button>
+            <button class="filter-tab" data-filter="0">Menunggu</button>
+            <button class="filter-tab" data-filter="1">Diterima</button>
+            <button class="filter-tab" data-filter="2">Diproses</button>
+            <button class="filter-tab" data-filter="3">Siap Pickup</button>
+        </div>
+        <div id="ordersContainer"></div>
+    </main>
+
+    <script src="app.js"></script>
+    <script>
+        const user = requireRole('tenant');
+        if (!user) { /* redirected */ }
+        const myWarung = findWarung(user.warungId);
+        document.getElementById('warungName').textContent = myWarung ? myWarung.name : user.name;
+
+        const TENANT_STATUS_LABELS = ['Menunggu Konfirmasi', 'Diterima', 'Diproses', 'Siap Pick Up'];
+        let currentFilter = 'all';
+
+        /* ---------- Get orders that contain items from this warung ---------- */
+        function getMyOrders() {
+            const all = getOrders();
+            return all
+                .map(o => {
+                    const myItems = o.items.filter(it => it.warungId === user.warungId);
+                    if (myItems.length === 0) return null;
+                    const mySubtotal = myItems.reduce((s, it) => s + it.price * it.qty, 0);
+                    return {
+                        ...o,
+                        myItems,
+                        mySubtotal,
+                        myStatus: o.statusByWarung[user.warungId] ?? 0
+                    };
+                })
+                .filter(Boolean)
+                .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        }
+
+        function renderOrders() {
+            const orders = getMyOrders();
+
+            // Stats
+            const masuk = orders.filter(o => o.myStatus === 0).length;
+            const proses = orders.filter(o => o.myStatus === 2).length;
+            const siap = orders.filter(o => o.myStatus === 3).length;
+            document.getElementById('statMasuk').textContent = masuk;
+            document.getElementById('statProses').textContent = proses;
+            document.getElementById('statSiap').textContent = siap;
+
+            // Filter
+            const filtered = currentFilter === 'all' ? orders : orders.filter(o => o.myStatus === parseInt(currentFilter));
+
+            const container = document.getElementById('ordersContainer');
+            if (filtered.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-inbox"></i>
+                        <h3>Belum Ada Pesanan</h3>
+                        <p>Pesanan baru akan muncul di sini secara otomatis.</p>
+                    </div>`;
+                return;
+            }
+
+            let html = '<div class="orders-grid">';
+            filtered.forEach(o => {
+                const time = new Date(o.createdAt).toLocaleString('id-ID', {
+                    day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit'
+                });
+                const statusLabel = TENANT_STATUS_LABELS[o.myStatus];
+                const statusClass = ['status-menunggu', 'status-diterima', 'status-diproses', 'status-siap'][o.myStatus];
+
+                let itemsHtml = '';
+                o.myItems.forEach(it => {
+                    itemsHtml += `
+                        <div class="order-item-row">
+                            <span>${it.name} <span style="color:#888;">x${it.qty}</span></span>
+                            <span>${formatRupiah(it.price * it.qty)}</span>
+                        </div>`;
+                });
+
+                html += `
+                    <div class="order-card">
+                        <div class="order-header">
+                            <div>
+                                <div class="order-id">${o.id}</div>
+                                <div class="order-time"><i class="far fa-clock"></i> ${time}</div>
+                            </div>
+                            <span class="status-badge ${statusClass}">${statusLabel}</span>
+                        </div>
+                        <div class="order-body">
+                            <div class="order-customer">
+                                <div><i class="fas fa-user"></i> <strong>${o.customer.nama}</strong></div>
+                                <div><i class="fas fa-phone"></i> ${o.customer.telp}</div>
+                                <div><i class="fas fa-map-marker-alt"></i> ${o.customer.lokasi}</div>
+                                ${o.customer.notes ? `<div><i class="fas fa-sticky-note"></i> <em>${o.customer.notes}</em></div>` : ''}
+                            </div>
+                            <div class="order-items">${itemsHtml}</div>
+                            <div class="order-total">
+                                <span>Subtotal Warung Anda</span>
+                                <span>${formatRupiah(o.mySubtotal)}</span>
+                            </div>
+                            <div class="order-actions">
+                                <button class="btn-accept"  onclick="setStatus('${o.id}', 1)" ${o.myStatus >= 1 ? 'disabled' : ''}>
+                                    <i class="fas fa-check"></i> Terima
+                                </button>
+                                <button class="btn-process" onclick="setStatus('${o.id}', 2)" ${o.myStatus >= 2 || o.myStatus < 1 ? 'disabled' : ''}>
+                                    <i class="fas fa-fire"></i> Proses
+                                </button>
+                                <button class="btn-ready"   onclick="setStatus('${o.id}', 3)" ${o.myStatus >= 3 || o.myStatus < 2 ? 'disabled' : ''}>
+                                    <i class="fas fa-box"></i> Siap Pickup
+                                </button>
+                            </div>
+                        </div>
+                    </div>`;
+            });
+            html += '</div>';
+            container.innerHTML = html;
+        }
+
+        function setStatus(orderId, newStatus) {
+            const all = getOrders();
+            const order = all.find(o => o.id === orderId);
+            if (!order) return;
+            order.statusByWarung[user.warungId] = newStatus;
+            saveOrders(all);
+            renderOrders();
+            const labels = ['', 'diterima', 'diproses', 'siap pickup'];
+            showToast(`Pesanan ${orderId} ${labels[newStatus]}!`);
+        }
+
+        // Filter tabs
+        document.querySelectorAll('.filter-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                currentFilter = tab.dataset.filter;
+                renderOrders();
+            });
+        });
+
+        renderOrders();
+        // Auto-refresh every 4s for new orders from customers
+        setInterval(renderOrders, 4000);
+
+        // Navbar scroll
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(102, 126, 234, 0.95)';
+            } else {
+                navbar.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+            }
+        });
+    </script>
+</body>
+</html>
