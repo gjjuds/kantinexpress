@@ -357,6 +357,11 @@
             const all = getOrders();
             return all
                 .filter(o => {
+                    // [TAMBAHAN BARU] Filter agar hanya pesanan 'antar' yang masuk ke kurir
+                    if (o.deliveryMethod === 'pickup') {
+                        return false; 
+                    }
+
                     const warungIds = Object.keys(o.statusByWarung);
                     // Show only when every warung has marked siap pickup (>= 3)
                     return warungIds.length > 0 && warungIds.every(wid => (o.statusByWarung[wid] ?? 0) >= 3);
