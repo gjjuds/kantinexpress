@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pesan Makanan - Kantin Express</title>
+    <title>Pesan Makanan - MakanYuk</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="shared.css">
@@ -631,7 +631,7 @@
         <div class="nav-container">
             <a href="index.html" class="logo">
                 <i class="fas fa-utensils"></i>
-                Kantin Express
+                MakanYuk
             </a>
             <ul class="nav-menu">
                 <li><a href="index.html" class="nav-link"><i class="fas fa-home"></i> <span>Home</span></a></li>
@@ -1137,9 +1137,14 @@
         }
 
         function isOrderActive(order) {
-            // Active if any warung not yet at "Siap Pickup" (status < 3) OR kurir hasn't delivered (< 2)
             const warungIds = Object.keys(order.statusByWarung);
             const allReady = warungIds.length > 0 && warungIds.every(wid => (order.statusByWarung[wid] ?? 0) >= 3);
+            
+            // [TAMBAHAN] Jika Pick Up Sendiri, pesanan selesai (tidak aktif) jika semua tenant sudah "Siap Pick Up"
+            if (order.deliveryMethod === 'pickup') {
+                return !allReady;
+            }
+            
             const delivered = order.kurirStatus >= 2;
             return !(allReady && delivered);
         }
@@ -1205,18 +1210,34 @@
 
                 // Determine overall status label & badge class
                 let badgeLabel = '', badgeClass = '';
-                if (o.kurirStatus >= 2) { badgeLabel = 'Selesai'; badgeClass = 'status-selesai'; }
-                else if (o.kurirStatus === 1) { badgeLabel = 'Diantar Kurir'; badgeClass = 'status-pickup'; }
-                else {
-                    const warungIds = Object.keys(o.statusByWarung);
-                    const allReady = warungIds.every(wid => (o.statusByWarung[wid] ?? 0) >= 3);
-                    if (allReady) { badgeLabel = 'Menunggu Kurir'; badgeClass = 'status-siap'; }
-                    else {
+                const warungIds = Object.keys(o.statusByWarung);
+                const allReady = warungIds.length > 0 && warungIds.every(wid => (o.statusByWarung[wid] ?? 0) >= 3);
+
+                if (o.deliveryMethod === 'pickup') {
+                    // [TAMBAHAN] Logika status khusus Pick Up Sendiri
+                    if (allReady) { 
+                        badgeLabel = 'Selesai'; 
+                        badgeClass = 'status-selesai'; 
+                    } else {
                         const anyProcessing = warungIds.some(wid => (o.statusByWarung[wid] ?? 0) === 2);
                         const anyAccepted = warungIds.some(wid => (o.statusByWarung[wid] ?? 0) >= 1);
                         if (anyProcessing) { badgeLabel = 'Diproses'; badgeClass = 'status-diproses'; }
                         else if (anyAccepted) { badgeLabel = 'Diterima'; badgeClass = 'status-diterima'; }
                         else { badgeLabel = 'Menunggu Konfirmasi'; badgeClass = 'status-menunggu'; }
+                    }
+                } else {
+                    // Logika lama untuk Diantar Kurir
+                    if (o.kurirStatus >= 2) { badgeLabel = 'Selesai'; badgeClass = 'status-selesai'; }
+                    else if (o.kurirStatus === 1) { badgeLabel = 'Diantar Kurir'; badgeClass = 'status-pickup'; }
+                    else {
+                        if (allReady) { badgeLabel = 'Menunggu Kurir'; badgeClass = 'status-siap'; }
+                        else {
+                            const anyProcessing = warungIds.some(wid => (o.statusByWarung[wid] ?? 0) === 2);
+                            const anyAccepted = warungIds.some(wid => (o.statusByWarung[wid] ?? 0) >= 1);
+                            if (anyProcessing) { badgeLabel = 'Diproses'; badgeClass = 'status-diproses'; }
+                            else if (anyAccepted) { badgeLabel = 'Diterima'; badgeClass = 'status-diterima'; }
+                            else { badgeLabel = 'Menunggu Konfirmasi'; badgeClass = 'status-menunggu'; }
+                        }
                     }
                 }
 
