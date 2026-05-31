@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="shared.css">
     <style>
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background: white;
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -42,8 +42,8 @@
         }
 
         .login-brand {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            background: linear-gradient(135deg, #FE724C 0%, #FFC529 100%);
+            color: #272D2F;
             padding: 3rem 2.5rem;
             display: flex;
             flex-direction: column;
@@ -59,7 +59,7 @@
             right: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(255,215,0,0.15) 0%, transparent 60%);
+            background: radial-gradient(circle, rgba(255,197,41,0.15) 0%, transparent 60%);
             animation: rotate 20s linear infinite;
         }
 
@@ -75,7 +75,7 @@
             position: relative;
             z-index: 2;
         }
-        .brand-logo i { color: #ffd700; margin-right: 0.5rem; }
+        .brand-logo i { color: #272D2F; margin-right: 0.5rem; }
 
         .brand-tagline {
             font-size: 1.05rem;
@@ -114,7 +114,7 @@
         }
         .demo-creds .cred-row:last-child { border-bottom: none; }
         .demo-creds .cred-role {
-            background: rgba(255,215,0,0.25);
+            background: rgba(255,197,41,0.25);
             padding: 0.1rem 0.6rem;
             border-radius: 10px;
             font-weight: 500;
@@ -135,11 +135,11 @@
         .login-title {
             font-size: 1.8rem;
             font-weight: 700;
-            color: #333;
+            color: #272D2F;
             margin-bottom: 0.4rem;
         }
         .login-subtitle {
-            color: #888;
+            color: #272D2F;
             margin-bottom: 2rem;
         }
 
@@ -151,8 +151,8 @@
         }
 
         .role-option {
-            border: 2px solid #e1e8ff;
-            background: #f8faff;
+            border: 2px solid #D7D7D7;
+            background: #D7D7D7;
             padding: 0.8rem 0.4rem;
             border-radius: 12px;
             text-align: center;
@@ -162,7 +162,7 @@
 
         .role-option i {
             font-size: 1.3rem;
-            color: #667eea;
+            color: #272D2F;
             margin-bottom: 0.3rem;
             display: block;
         }
@@ -170,18 +170,18 @@
         .role-option span {
             font-size: 0.82rem;
             font-weight: 500;
-            color: #555;
+            color: #272D2F;
         }
 
         .role-option.active {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            border-color: #667eea;
+            background: linear-gradient(135deg, #FE724C, #FFC529);
+            border-color: #FE724C;
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(102,126,234,0.3);
+            box-shadow: 0 8px 20px rgba(254,114,76,0.3);
         }
         .role-option.active i,
         .role-option.active span {
-            color: white;
+            color: #272D2F;
         }
 
         .input-wrapper {
@@ -193,30 +193,30 @@
             left: 1rem;
             top: 50%;
             transform: translateY(-50%);
-            color: #667eea;
+            color: #272D2F;
         }
         .input-wrapper input {
             width: 100%;
             padding: 0.85rem 1rem 0.85rem 2.8rem;
-            border: 2px solid #e1e8ff;
+            border: 2px solid #D7D7D7;
             border-radius: 12px;
             font-size: 1rem;
             font-family: inherit;
             outline: none;
-            background: #f8faff;
+            background: #D7D7D7;
             transition: all 0.3s;
         }
         .input-wrapper input:focus {
-            border-color: #667eea;
+            border-color: #FE724C;
             background: white;
-            box-shadow: 0 0 0 3px rgba(102,126,234,0.1);
+            box-shadow: 0 0 0 3px rgba(254,114,76,0.1);
         }
 
         .login-btn {
             width: 100%;
             padding: 1rem;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
+            background: linear-gradient(135deg, #FE724C, #FFC529);
+            color: #272D2F;
             border: none;
             border-radius: 12px;
             font-size: 1rem;
@@ -228,12 +228,12 @@
         }
         .login-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(102,126,234,0.4);
+            box-shadow: 0 10px 25px rgba(254,114,76,0.4);
         }
 
         .error-msg {
-            background: #ffe5e8;
-            color: #d63031;
+            background: #D7D7D7;
+            color: #272D2F;
             padding: 0.7rem 1rem;
             border-radius: 10px;
             margin-bottom: 1rem;

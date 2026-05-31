@@ -10,8 +10,8 @@
     <style>
         /* ===== Page Header ===== */
         .page-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            background: linear-gradient(135deg, #FE724C 0%, #FFC529 100%);
+            color: #272D2F;
             padding: 2rem 0;
             margin-top: 80px;
             text-align: center;
@@ -42,17 +42,17 @@
         .search-input {
             width: 100%;
             padding: 1rem 1.5rem 1rem 3.5rem;
-            border: 2px solid #e1e8ff;
+            border: 2px solid #D7D7D7;
             border-radius: 50px;
             font-size: 1rem;
             outline: none;
             transition: all 0.3s ease;
-            background: #f8faff;
+            background: white;
             font-family: inherit;
         }
         .search-input:focus {
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102,126,234,0.1);
+            border-color: #FE724C;
+            box-shadow: 0 0 0 3px rgba(254,114,76,0.1);
             background: white;
         }
         .search-icon {
@@ -60,7 +60,7 @@
             left: 1.3rem;
             top: 50%;
             transform: translateY(-50%);
-            color: #667eea;
+            color: #272D2F;
             font-size: 1.1rem;
         }
 
@@ -80,7 +80,7 @@
         }
         .warung-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 20px 60px rgba(102,126,234,0.18);
+            box-shadow: 0 20px 60px rgba(254,114,76,0.18);
         }
         .warung-image {
             width: 100%;
@@ -90,8 +90,8 @@
         }
         .warung-card:hover .warung-image { transform: scale(1.05); }
         .warung-info { padding: 1.4rem; }
-        .warung-name { font-size: 1.3rem; font-weight: 600; color: #333; margin-bottom: 0.3rem; }
-        .warung-desc { color: #666; margin-bottom: 1rem; font-size: 0.92rem; }
+        .warung-name { font-size: 1.3rem; font-weight: 600; color: #272D2F; margin-bottom: 0.3rem; }
+        .warung-desc { color: #272D2F; margin-bottom: 1rem; font-size: 0.92rem; }
         .warung-stats {
             display: flex;
             justify-content: space-between;
@@ -102,13 +102,13 @@
             display: flex;
             align-items: center;
             gap: 0.4rem;
-            color: #f59e0b;
+            color: #272D2F;
             font-weight: 500;
             font-size: 0.95rem;
         }
         .orders {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
+            background: linear-gradient(135deg, #FE724C, #FFC529);
+            color: #272D2F;
             padding: 0.25rem 0.85rem;
             border-radius: 20px;
             font-size: 0.82rem;
@@ -117,8 +117,8 @@
         .warung-action {
             width: 100%;
             padding: 0.9rem;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
+            background: linear-gradient(135deg, #FE724C, #FFC529);
+            color: #272D2F;
             border: none;
             border-radius: 12px;
             font-size: 0.98rem;
@@ -128,7 +128,7 @@
             font-family: inherit;
         }
         .warung-action:hover {
-            background: linear-gradient(135deg, #5a67d8, #6b46c1);
+            background: linear-gradient(135deg, #FE724C, #FFC529);
             transform: translateY(-2px);
         }
 
@@ -138,15 +138,15 @@
             top: 100px;
             right: 2rem;
             z-index: 900;
-            background: linear-gradient(135deg, #ff6b6b, #ffd93d);
-            color: white;
+            background: linear-gradient(135deg, #FE724C, #FFC529);
+            color: #272D2F;
             border: none;
             padding: 0.85rem 1.3rem;
             border-radius: 50px;
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
-            box-shadow: 0 10px 25px rgba(255,107,107,0.4);
+            box-shadow: 0 10px 25px rgba(254,114,76,0.4);
             transition: all 0.3s;
             display: flex;
             align-items: center;
@@ -155,11 +155,11 @@
         }
         .cart-float:hover {
             transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(255,107,107,0.55);
+            box-shadow: 0 15px 35px rgba(254,114,76,0.55);
         }
         .cart-float .cart-count {
-            background: white;
-            color: #ff6b6b;
+            background: #272D2F;
+            color: #FFC529;
             border-radius: 50%;
             min-width: 24px;
             height: 24px;
@@ -176,15 +176,15 @@
             top: 158px;
             right: 2rem;
             z-index: 900;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
+            background: linear-gradient(135deg, #FE724C, #FFC529);
+            color: #272D2F;
             border: none;
             padding: 0.85rem 1.3rem;
             border-radius: 50px;
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
-            box-shadow: 0 10px 25px rgba(102,126,234,0.4);
+            box-shadow: 0 10px 25px rgba(254,114,76,0.4);
             transition: all 0.3s;
             display: flex;
             align-items: center;
@@ -193,11 +193,11 @@
         }
         .history-float:hover {
             transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(102,126,234,0.55);
+            box-shadow: 0 15px 35px rgba(254,114,76,0.55);
         }
         .history-float .history-count {
-            background: white;
-            color: #667eea;
+            background: #272D2F;
+            color: #FFC529;
             border-radius: 50%;
             min-width: 24px;
             height: 24px;
@@ -213,7 +213,7 @@
             display: flex;
             gap: 0.5rem;
             margin-bottom: 1.5rem;
-            background: #f8faff;
+            background: #D7D7D7;
             padding: 0.4rem;
             border-radius: 14px;
         }
@@ -225,7 +225,7 @@
             border-radius: 10px;
             cursor: pointer;
             font-weight: 600;
-            color: #888;
+            color: #272D2F;
             transition: all 0.25s;
             font-family: inherit;
             font-size: 0.92rem;
@@ -234,35 +234,35 @@
             justify-content: center;
             gap: 0.4rem;
         }
-        .history-tab:hover { color: #667eea; }
+        .history-tab:hover { color: #272D2F; }
         .history-tab.active {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            box-shadow: 0 6px 15px rgba(102,126,234,0.3);
+            background: linear-gradient(135deg, #FE724C, #FFC529);
+            color: #272D2F;
+            box-shadow: 0 6px 15px rgba(254,114,76,0.3);
         }
         .history-tab .badge-num {
-            background: rgba(255,255,255,0.3);
+            background: rgba(39,45,47,0.12);
             padding: 0.05rem 0.5rem;
             border-radius: 10px;
             font-size: 0.78rem;
         }
         .history-tab:not(.active) .badge-num {
-            background: #e1e8ff;
-            color: #667eea;
+            background: #D7D7D7;
+            color: #272D2F;
         }
 
         /* Order card inside history modal */
         .history-order-card {
             background: white;
-            border: 2px solid #e1e8ff;
+            border: 2px solid #D7D7D7;
             border-radius: 14px;
             padding: 1rem 1.2rem;
             margin-bottom: 1rem;
             transition: all 0.2s;
         }
         .history-order-card:hover {
-            border-color: #667eea;
-            box-shadow: 0 8px 20px rgba(102,126,234,0.1);
+            border-color: #FE724C;
+            box-shadow: 0 8px 20px rgba(254,114,76,0.1);
         }
         .history-order-head {
             display: flex;
@@ -274,27 +274,27 @@
         }
         .history-order-id {
             font-weight: 700;
-            color: #667eea;
+            color: #272D2F;
             font-size: 1rem;
         }
         .history-order-time {
             font-size: 0.8rem;
-            color: #888;
+            color: #272D2F;
         }
         .history-order-summary {
             font-size: 0.88rem;
-            color: #666;
+            color: #272D2F;
             margin-bottom: 0.5rem;
         }
         .history-order-total {
             font-weight: 600;
-            color: #333;
+            color: #272D2F;
         }
-        .history-order-total span { color: #667eea; }
+        .history-order-total span { color: #272D2F; }
         .history-detail-btn {
-            background: #f0f4ff;
-            color: #667eea;
-            border: none;
+            background: white;
+            color: #272D2F;
+            border: 1px solid #FE724C;
             padding: 0.45rem 0.9rem;
             border-radius: 8px;
             font-weight: 600;
@@ -304,12 +304,12 @@
             transition: all 0.2s;
             margin-top: 0.5rem;
         }
-        .history-detail-btn:hover { background: #667eea; color: white; }
+        .history-detail-btn:hover { background: #FE724C; color: #272D2F; }
 
         .back-btn {
-            background: #f0f4ff;
-            color: #667eea;
-            border: none;
+            background: white;
+            color: #272D2F;
+            border: 1px solid #FE724C;
             padding: 0.5rem 1rem;
             border-radius: 10px;
             font-weight: 600;
@@ -322,7 +322,7 @@
             gap: 0.4rem;
             transition: all 0.2s;
         }
-        .back-btn:hover { background: #667eea; color: white; }
+        .back-btn:hover { background: #FE724C; color: #272D2F; }
 
         /* ===== Menu Modal ===== */
         .menu-list {
@@ -333,13 +333,13 @@
             display: flex;
             gap: 1rem;
             padding: 1rem;
-            background: #f8faff;
+            background: #D7D7D7;
             border-radius: 14px;
-            border: 2px solid transparent;
+            border: 2px solid rgba(39,45,47,0.08);
             transition: all 0.2s;
             align-items: center;
         }
-        .menu-item:hover { border-color: #e1e8ff; }
+        .menu-item:hover { border-color: #FE724C; }
         .menu-item img {
             width: 80px;
             height: 80px;
@@ -348,24 +348,40 @@
             flex-shrink: 0;
         }
         .menu-item-info { flex: 1; min-width: 0; }
-        .menu-item-name { font-weight: 600; color: #333; margin-bottom: 0.2rem; font-size: 1rem; }
-        .menu-item-price { color: #667eea; font-weight: 600; font-size: 0.95rem; }
+        .menu-item-name { font-weight: 600; color: #272D2F; margin-bottom: 0.2rem; font-size: 1rem; }
+        .menu-item-price { color: #272D2F; font-weight: 600; font-size: 0.95rem; }
 
         .qty-control {
-            display: flex;
+            display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 0.5rem;
+            flex-shrink: 0;
         }
         .qty-btn {
-            width: 32px; height: 32px;
+            width: 32px;
+            height: 32px;
+            min-width: 32px;
+            min-height: 32px;
+            padding: 0;
             border: none;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
+            background: linear-gradient(135deg, #FE724C, #FFC529);
+            color: #272D2F;
             border-radius: 8px;
             cursor: pointer;
             font-size: 1rem;
+            line-height: 1;
             font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex: 0 0 32px;
+            appearance: none;
+            -webkit-appearance: none;
             transition: all 0.2s;
+            font-family: inherit;
+            text-align: center;
+            touch-action: manipulation;
         }
         .qty-btn:hover { transform: scale(1.1); }
         .qty-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
@@ -373,11 +389,13 @@
             min-width: 28px;
             text-align: center;
             font-weight: 600;
-            color: #333;
+            color: #272D2F;
+            line-height: 32px;
+            flex: 0 0 28px;
         }
         .add-to-cart-btn {
-            background: linear-gradient(135deg, #00b894, #00a085);
-            color: white;
+            background: linear-gradient(135deg, #FE724C, #FE724C);
+            color: #272D2F;
             border: none;
             padding: 0.5rem 1rem;
             border-radius: 10px;
@@ -388,25 +406,31 @@
             font-family: inherit;
             white-space: nowrap;
         }
-        .add-to-cart-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 15px rgba(0,184,148,0.4); }
-        .add-to-cart-btn:disabled { background: #ccc; cursor: not-allowed; }
+        .add-to-cart-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 15px rgba(254,114,76,0.4); }
+        .add-to-cart-btn:disabled { background: #D7D7D7; color: #272D2F; cursor: not-allowed; }
 
         @media (max-width: 600px) {
             .menu-item { flex-wrap: wrap; }
             .menu-item img { width: 60px; height: 60px; }
+            .menu-item-info { flex-basis: calc(100% - 76px); }
+            .add-to-cart-btn {
+                width: 100%;
+                justify-content: center;
+                padding: 0.75rem 1rem;
+            }
         }
 
         /* ===== Cart Modal ===== */
         .cart-warung-group {
-            background: #f8faff;
+            background: #D7D7D7;
             padding: 1rem 1.2rem;
             border-radius: 14px;
             margin-bottom: 1rem;
-            border-left: 4px solid #667eea;
+            border-left: 4px solid #FE724C;
         }
         .cart-warung-name {
             font-weight: 600;
-            color: #667eea;
+            color: #272D2F;
             margin-bottom: 0.7rem;
             font-size: 0.95rem;
         }
@@ -415,28 +439,28 @@
             justify-content: space-between;
             align-items: center;
             padding: 0.5rem 0;
-            border-bottom: 1px dashed #d8e0f5;
+            border-bottom: 1px dashed #D7D7D7;
         }
         .cart-item:last-child { border-bottom: none; }
         .cart-item-info { flex: 1; }
         .cart-item-name { font-weight: 500; font-size: 0.92rem; }
-        .cart-item-meta { font-size: 0.82rem; color: #888; }
+        .cart-item-meta { font-size: 0.82rem; color: #272D2F; }
         .cart-item-actions { display: flex; align-items: center; gap: 0.6rem; }
-        .cart-item-price { font-weight: 600; color: #333; font-size: 0.92rem; }
+        .cart-item-price { font-weight: 600; color: #272D2F; font-size: 0.92rem; }
         .cart-remove {
-            background: #ffe5e8;
-            color: #d63031;
-            border: none;
+            background: white;
+            color: #272D2F;
+            border: 1px solid #FE724C;
             width: 28px;
             height: 28px;
             border-radius: 8px;
             cursor: pointer;
             transition: all 0.2s;
         }
-        .cart-remove:hover { background: #d63031; color: white; }
+        .cart-remove:hover { background: #FE724C; color: #272D2F; }
 
         .cart-summary {
-            background: linear-gradient(135deg, #f0f4ff, #faf5ff);
+            background: linear-gradient(135deg, #D7D7D7, #D7D7D7);
             padding: 1.2rem;
             border-radius: 14px;
             margin-top: 1rem;
@@ -445,26 +469,26 @@
             display: flex;
             justify-content: space-between;
             padding: 0.4rem 0;
-            color: #555;
+            color: #272D2F;
         }
         .summary-row.total {
-            border-top: 2px dashed #667eea;
+            border-top: 2px dashed #FE724C;
             margin-top: 0.5rem;
             padding-top: 0.8rem;
             font-size: 1.15rem;
             font-weight: 700;
-            color: #333;
+            color: #272D2F;
         }
-        .summary-row.total span:last-child { color: #667eea; }
+        .summary-row.total span:last-child { color: #272D2F; }
 
         .empty-state {
             text-align: center;
             padding: 2rem 1rem;
-            color: #999;
+            color: #272D2F;
         }
         .empty-state i {
             font-size: 3rem;
-            color: #d8e0f5;
+            color: #272D2F;
             margin-bottom: 1rem;
         }
 
@@ -474,40 +498,40 @@
         }
         .delivery-section-title {
             font-weight: 700;
-            color: #333;
+            color: #272D2F;
             font-size: 0.95rem;
             margin-bottom: 0.75rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
-        .delivery-section-title i { color: #667eea; }
+        .delivery-section-title i { color: #272D2F; }
         .delivery-cards {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 0.75rem;
         }
         .delivery-card {
-            border: 2.5px solid #e1e8ff;
+            border: 2.5px solid #D7D7D7;
             border-radius: 14px;
             padding: 1rem;
             cursor: pointer;
             transition: all 0.25s ease;
-            background: #f8faff;
+            background: white;
             text-align: center;
             position: relative;
             user-select: none;
         }
         .delivery-card:hover {
-            border-color: #667eea;
-            background: #f0f4ff;
+            border-color: #FE724C;
+            background: #D7D7D7;
             transform: translateY(-2px);
-            box-shadow: 0 6px 18px rgba(102,126,234,0.15);
+            box-shadow: 0 6px 18px rgba(254,114,76,0.15);
         }
         .delivery-card.selected {
-            border-color: #667eea;
-            background: linear-gradient(135deg, #f0f4ff, #faf5ff);
-            box-shadow: 0 6px 20px rgba(102,126,234,0.2);
+            border-color: #FE724C;
+            background: linear-gradient(135deg, #D7D7D7, #D7D7D7);
+            box-shadow: 0 6px 20px rgba(254,114,76,0.2);
         }
         .delivery-card.selected::after {
             content: '✓';
@@ -516,8 +540,8 @@
             right: 0.6rem;
             width: 20px;
             height: 20px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
+            background: linear-gradient(135deg, #FE724C, #FFC529);
+            color: #272D2F;
             border-radius: 50%;
             font-size: 0.7rem;
             font-weight: 700;
@@ -533,22 +557,22 @@
         .delivery-card-label {
             font-weight: 700;
             font-size: 0.9rem;
-            color: #333;
+            color: #272D2F;
             margin-bottom: 0.25rem;
         }
         .delivery-card-desc {
             font-size: 0.78rem;
-            color: #888;
+            color: #272D2F;
             line-height: 1.4;
         }
-        .delivery-card.selected .delivery-card-label { color: #667eea; }
+        .delivery-card.selected .delivery-card-label { color: #272D2F; }
         .delivery-card-price {
             margin-top: 0.4rem;
             font-size: 0.82rem;
             font-weight: 600;
-            color: #00b894;
+            color: #272D2F;
         }
-        .delivery-card.selected .delivery-card-price { color: #667eea; }
+        .delivery-card.selected .delivery-card-price { color: #272D2F; }
 
         /* ===== QRIS Modal ===== */
         .qris-container {
@@ -562,10 +586,10 @@
             background: white;
             border-radius: 16px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            border: 4px solid #667eea;
+            border: 4px solid #FE724C;
         }
         .qris-info {
-            background: #f8faff;
+            background: #D7D7D7;
             padding: 1rem 1.2rem;
             border-radius: 12px;
             margin-bottom: 1rem;
@@ -573,7 +597,7 @@
         .qris-amount {
             font-size: 2rem;
             font-weight: 700;
-            color: #667eea;
+            color: #272D2F;
             margin: 0.5rem 0;
         }
 
@@ -585,18 +609,18 @@
             gap: 1rem;
             padding: 0.8rem 1rem;
             margin-bottom: 0.6rem;
-            background: #f8faff;
+            background: #D7D7D7;
             border-radius: 12px;
-            border-left: 4px solid #d8e0f5;
+            border-left: 4px solid #D7D7D7;
             transition: all 0.3s;
         }
         .status-step.done {
-            background: linear-gradient(90deg, #d4edda, #c8e6c9);
-            border-left-color: #00b894;
+            background: linear-gradient(90deg, #D7D7D7, #D7D7D7);
+            border-left-color: #272D2F;
         }
         .status-step.current {
-            background: linear-gradient(90deg, #fff3cd, #ffeaa7);
-            border-left-color: #f59e0b;
+            background: linear-gradient(90deg, #FFC529, #FFC529);
+            border-left-color: #272D2F;
             animation: pulse 2s infinite;
         }
         @keyframes pulse {
@@ -606,15 +630,15 @@
         .status-icon {
             width: 36px; height: 36px;
             border-radius: 50%;
-            background: #d8e0f5;
-            color: white;
+            background: #D7D7D7;
+            color: #272D2F;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
         }
-        .status-step.done .status-icon { background: #00b894; }
-        .status-step.current .status-icon { background: #f59e0b; }
+        .status-step.done .status-icon { background: #FE724C; }
+        .status-step.current .status-icon { background: #FFC529; }
         .status-label { font-weight: 500; }
 
         @media (max-width: 768px) {
@@ -708,14 +732,14 @@
                 <!-- Delivery method summary badge -->
                 <div id="deliverySummaryBadge" style="
                     display:flex; align-items:center; gap:0.6rem;
-                    background: linear-gradient(135deg, #f0f4ff, #faf5ff);
-                    border: 2px solid #e1e8ff;
+                    background: linear-gradient(135deg, #D7D7D7, #D7D7D7);
+                    border: 2px solid #D7D7D7;
                     border-radius: 12px;
                     padding: 0.75rem 1rem;
                     margin-bottom: 1.2rem;
                     font-size: 0.9rem;
                     font-weight: 600;
-                    color: #667eea;
+                    color: #272D2F;
                 "></div>
                 <form id="orderForm">
                     <div class="form-group">
@@ -731,7 +755,7 @@
                         <input type="text" class="form-input" id="formLokasi" placeholder="Contoh: Gedung A Lantai 2">
                     </div>
                     <div class="form-group" id="pickupInfoGroup" style="display:none;">
-                        <div style="background:#e8f8f2; border:2px solid #00b894; border-radius:12px; padding:0.85rem 1rem; color:#00a085; font-size:0.88rem;">
+                        <div style="background:#D7D7D7; border:2px solid #FE724C; border-radius:12px; padding:0.85rem 1rem; color:#272D2F; font-size:0.88rem;">
                             <i class="fas fa-walking"></i> <strong>Pick Up Sendiri</strong> — Kamu akan mengambil pesanan langsung ke warung. Tidak ada biaya ongkir!
                         </div>
                     </div>
@@ -758,16 +782,16 @@
                 <div class="qris-info">
                     <div>Total Pembayaran</div>
                     <div class="qris-amount" id="qrisAmount">Rp 0</div>
-                    <div style="font-size: 0.85rem; color: #888;">Order ID: <strong id="qrisOrderId">-</strong></div>
+                    <div style="font-size: 0.85rem; color: #272D2F;">Order ID: <strong id="qrisOrderId">-</strong></div>
                 </div>
                 <img class="qris-image" id="qrisImage" alt="QRIS Code">
-                <p style="color:#666; font-size:0.92rem; margin-bottom: 1.2rem;">
+                <p style="color:#272D2F; font-size:0.92rem; margin-bottom: 1.2rem;">
                     Scan QRIS di atas menggunakan aplikasi mobile banking atau e-wallet Anda.
                 </p>
-                <div style="background:#f0f4ff; padding:1rem; border-radius:12px; color:#555; font-size:0.88rem;">
-                    <i class="fas fa-info-circle" style="color:#667eea;"></i>
+                <div style="background:#D7D7D7; padding:1rem; border-radius:12px; color:#272D2F; font-size:0.88rem;">
+                    <i class="fas fa-info-circle" style="color:#272D2F;"></i>
                     Setelah pembayaran, status pesanan dapat dipantau melalui tombol
-                    <strong style="color:#667eea;">Riwayat Pesanan</strong> di kanan layar.
+                    <strong style="color:#272D2F;">Riwayat Pesanan</strong> di kanan layar.
                 </div>
                 <button class="btn-secondary" onclick="closeModal('qrisModal')" style="width:100%; margin-top:1rem;">
                     <i class="fas fa-check"></i> Tutup
@@ -800,8 +824,8 @@
             grid.innerHTML = '';
             if (list.length === 0) {
                 grid.innerHTML = `
-                    <div style="grid-column:1/-1; text-align:center; padding:3rem; color:#888;">
-                        <i class="fas fa-search" style="font-size:3rem; color:#d8e0f5; margin-bottom:1rem;"></i>
+                    <div style="grid-column:1/-1; text-align:center; padding:3rem; color:#272D2F;">
+                        <i class="fas fa-search" style="font-size:3rem; color:#272D2F; margin-bottom:1rem;"></i>
                         <p>Tidak ada warung ditemukan</p>
                     </div>`;
                 return;
@@ -1009,8 +1033,8 @@
                     </div>
                     <div class="summary-row">
                         <span><i class="fas fa-motorcycle"></i> Argo Kurir</span>
-                        <span style="${deliveryMethod === 'pickup' ? 'text-decoration:line-through; color:#bbb;' : ''}">
-                            ${deliveryMethod === 'pickup' ? '<span style="color:#00b894; text-decoration:none;">Gratis</span>' : formatRupiah(ONGKIR)}
+                        <span style="${deliveryMethod === 'pickup' ? 'text-decoration:line-through; color:#272D2F;' : ''}">
+                            ${deliveryMethod === 'pickup' ? '<span style="color:#272D2F; text-decoration:none;">Gratis</span>' : formatRupiah(ONGKIR)}
                         </span>
                     </div>
                     <div class="summary-row total">
@@ -1058,12 +1082,12 @@
                 ? `<i class="fas fa-motorcycle" style="font-size:1.3rem;"></i>
                    <div>
                      <div>Diantar ke lokasi kamu</div>
-                     <div style="font-size:0.8rem; color:#888; font-weight:400;">Total: ${formatRupiah(total)} (termasuk argo Rp 10.000)</div>
+                     <div style="font-size:0.8rem; color:#272D2F; font-weight:400;">Total: ${formatRupiah(total)} (termasuk argo Rp 10.000)</div>
                    </div>`
-                : `<i class="fas fa-walking" style="font-size:1.3rem; color:#00b894;"></i>
-                   <div style="color:#00a085;">
+                : `<i class="fas fa-walking" style="font-size:1.3rem; color:#272D2F;"></i>
+                   <div style="color:#272D2F;">
                      <div>Pick Up Sendiri — Gratis ongkir!</div>
-                     <div style="font-size:0.8rem; color:#888; font-weight:400;">Total: ${formatRupiah(total)}</div>
+                     <div style="font-size:0.8rem; color:#272D2F; font-weight:400;">Total: ${formatRupiah(total)}</div>
                    </div>`;
 
             closeModal('cartModal');
@@ -1251,7 +1275,7 @@
                             <span class="status-badge ${badgeClass}">${badgeLabel}</span>
                         </div>
                         <div class="history-order-summary">
-                            <i class="fas fa-shopping-bag" style="color:#667eea;"></i>
+                            <i class="fas fa-shopping-bag" style="color:#272D2F;"></i>
                             ${itemCount} item · ${warungs.length} warung (${warungs.join(', ')})
                         </div>
                         <div class="history-order-total">
@@ -1309,18 +1333,18 @@
                 <button class="back-btn" onclick="backToHistoryList()">
                     <i class="fas fa-arrow-left"></i> Kembali ke Daftar
                 </button>
-                <div style="background:#f8faff; padding:1rem 1.2rem; border-radius:12px; margin-bottom:1rem;">
-                    <div style="font-size:0.85rem; color:#888;">Order ID</div>
-                    <div style="font-weight:700; font-size:1.15rem; color:#667eea;">${order.id}</div>
-                    <div style="font-size:0.85rem; color:#888; margin-top:0.3rem;"><i class="far fa-clock"></i> ${time}</div>
-                    <div style="font-size:0.95rem; color:#555; margin-top:0.5rem;">
-                        Total: <strong style="color:#667eea;">${formatRupiah(order.total)}</strong>
+                <div style="background:#D7D7D7; padding:1rem 1.2rem; border-radius:12px; margin-bottom:1rem;">
+                    <div style="font-size:0.85rem; color:#272D2F;">Order ID</div>
+                    <div style="font-weight:700; font-size:1.15rem; color:#272D2F;">${order.id}</div>
+                    <div style="font-size:0.85rem; color:#272D2F; margin-top:0.3rem;"><i class="far fa-clock"></i> ${time}</div>
+                    <div style="font-size:0.95rem; color:#272D2F; margin-top:0.5rem;">
+                        Total: <strong style="color:#272D2F;">${formatRupiah(order.total)}</strong>
                         (Subtotal ${formatRupiah(order.subtotal)} + Argo ${formatRupiah(order.ongkir)})
                     </div>
                     <div style="margin-top:0.5rem; display:inline-flex; align-items:center; gap:0.4rem; padding:0.3rem 0.8rem; border-radius:20px; font-size:0.82rem; font-weight:600;
                         ${order.deliveryMethod === 'pickup'
-                            ? 'background:#e8f8f2; color:#00a085;'
-                            : 'background:#f0f4ff; color:#667eea;'}">
+                            ? 'background:#D7D7D7; color:#272D2F;'
+                            : 'background:#D7D7D7; color:#272D2F;'}">
                         <i class="fas ${order.deliveryMethod === 'pickup' ? 'fa-walking' : 'fa-motorcycle'}"></i>
                         ${order.deliveryMethod === 'pickup' ? 'Pick Up Sendiri' : 'Diantar Kurir'}
                     </div>
@@ -1330,8 +1354,10 @@
             Object.entries(groups).forEach(([wid, g]) => {
                 const sIdx = order.statusByWarung[wid] || 0;
                 const tenantFlow = ['Menunggu Konfirmasi', 'Diterima', 'Diproses', 'Siap Pick Up'];
-                // Bila kurir sudah mengambil pesanan (kurirStatus >= 1), "Siap Pick Up" dianggap selesai
-                const effectiveSIdx = (sIdx === 3 && order.kurirStatus >= 1) ? 4 : sIdx;
+                // Untuk pickup sendiri tidak ada status kurir, jadi "Siap Pick Up" adalah tahap akhir.
+                const isPickupReady = order.deliveryMethod === 'pickup' && sIdx >= 3;
+                const isKurirPickedUp = order.deliveryMethod !== 'pickup' && sIdx === 3 && order.kurirStatus >= 1;
+                const effectiveSIdx = (isPickupReady || isKurirPickedUp) ? 4 : sIdx;
                 html += `
                     <div class="cart-warung-group" style="margin-bottom:1.2rem;">
                         <div class="cart-warung-name"><i class="fas fa-store"></i> ${g.name}</div>
@@ -1356,8 +1382,8 @@
                 const kurirLabels = ['Menunggu Kurir', 'Diambil Kurir', 'Selesai (Diantar)'];
                 const effectiveKurir = order.kurirStatus >= 2 ? 3 : order.kurirStatus;
                 html += `
-                    <div class="cart-warung-group" style="border-left-color:#ff6b6b;">
-                        <div class="cart-warung-name" style="color:#ff6b6b;"><i class="fas fa-motorcycle"></i> Status Pengantaran</div>
+                    <div class="cart-warung-group" style="border-left-color:#272D2F;">
+                        <div class="cart-warung-name" style="color:#272D2F;"><i class="fas fa-motorcycle"></i> Status Pengantaran</div>
                         <div class="status-tracker">`;
                 kurirLabels.forEach((label, i) => {
                     let cls = '';
@@ -1375,9 +1401,9 @@
             } else {
                 // Pick up info
                 html += `
-                    <div class="cart-warung-group" style="border-left-color:#00b894;">
-                        <div class="cart-warung-name" style="color:#00a085;"><i class="fas fa-walking"></i> Pengambilan Sendiri</div>
-                        <div style="font-size:0.88rem; color:#555; padding:0.5rem 0;">
+                    <div class="cart-warung-group" style="border-left-color:#272D2F;">
+                        <div class="cart-warung-name" style="color:#272D2F;"><i class="fas fa-walking"></i> Pengambilan Sendiri</div>
+                        <div style="font-size:0.88rem; color:#272D2F; padding:0.5rem 0;">
                             Silakan datang langsung ke warung untuk mengambil pesananmu saat status <strong>Siap Pick Up</strong>.
                         </div>
                     </div>`;
@@ -1400,9 +1426,9 @@
         window.addEventListener('scroll', () => {
             const navbar = document.querySelector('.navbar');
             if (window.scrollY > 100) {
-                navbar.style.background = 'rgba(102, 126, 234, 0.95)';
+                navbar.style.background = 'rgba(254, 114, 76, 0.95)';
             } else {
-                navbar.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+                navbar.style.background = 'linear-gradient(135deg, #FE724C 0%, #FFC529 100%)';
             }
         });
 

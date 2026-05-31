@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="shared.css">
     <style>
         .page-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            background: linear-gradient(135deg, #FE724C 0%, #FFC529 100%);
+            color: #272D2F;
             padding: 2rem 0;
             margin-top: 80px;
         }
@@ -33,11 +33,11 @@
             flex-wrap: wrap;
         }
         .stat-card {
-            background: rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.35);
             padding: 0.8rem 1.2rem;
             border-radius: 12px;
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
+            border: 1px solid rgba(39,45,47,0.18);
             min-width: 110px;
         }
         .stat-value { font-size: 1.6rem; font-weight: 700; }
@@ -58,21 +58,21 @@
         }
         .filter-tab {
             background: white;
-            border: 2px solid #e1e8ff;
+            border: 2px solid #D7D7D7;
             padding: 0.6rem 1.2rem;
             border-radius: 50px;
             cursor: pointer;
             font-weight: 500;
-            color: #555;
+            color: #272D2F;
             transition: all 0.25s;
             font-family: inherit;
             font-size: 0.92rem;
         }
-        .filter-tab:hover { border-color: #667eea; color: #667eea; }
+        .filter-tab:hover { border-color: #FE724C; color: #272D2F; }
         .filter-tab.active {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            border-color: #667eea;
-            color: white;
+            background: linear-gradient(135deg, #FE724C, #FFC529);
+            border-color: #FE724C;
+            color: #272D2F;
         }
 
         /* Order Card */
@@ -89,17 +89,17 @@
             transition: all 0.3s;
             position: relative;
         }
-        .order-card:hover { transform: translateY(-5px); box-shadow: 0 20px 50px rgba(102,126,234,0.18); }
+        .order-card:hover { transform: translateY(-5px); box-shadow: 0 20px 50px rgba(254,114,76,0.18); }
         .order-card::before {
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0;
             height: 5px;
-            background: linear-gradient(90deg, #667eea, #764ba2);
+            background: linear-gradient(90deg, #FE724C, #FFC529);
         }
         .order-header {
             padding: 1.2rem 1.5rem;
-            border-bottom: 1px solid #f0f1ff;
+            border-bottom: 1px solid #D7D7D7;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -108,26 +108,26 @@
         }
         .order-id {
             font-weight: 700;
-            color: #667eea;
+            color: #272D2F;
             font-size: 1.05rem;
         }
         .order-time {
             font-size: 0.82rem;
-            color: #888;
+            color: #272D2F;
         }
         .order-body {
             padding: 1.2rem 1.5rem;
         }
         .order-customer {
-            background: #f8faff;
+            background: #D7D7D7;
             padding: 0.8rem 1rem;
             border-radius: 10px;
             margin-bottom: 1rem;
             font-size: 0.9rem;
         }
         .order-customer div { padding: 0.15rem 0; }
-        .order-customer strong { color: #667eea; }
-        .order-customer i { width: 18px; color: #667eea; }
+        .order-customer strong { color: #272D2F; }
+        .order-customer i { width: 18px; color: #272D2F; }
         .order-items {
             margin-bottom: 1rem;
         }
@@ -135,12 +135,12 @@
             display: flex;
             justify-content: space-between;
             padding: 0.4rem 0;
-            border-bottom: 1px dashed #e1e8ff;
+            border-bottom: 1px dashed #D7D7D7;
             font-size: 0.92rem;
         }
         .order-item-row:last-child { border-bottom: none; }
         .order-total {
-            background: linear-gradient(135deg, #f0f4ff, #faf5ff);
+            background: linear-gradient(135deg, #D7D7D7, #D7D7D7);
             padding: 0.7rem 1rem;
             border-radius: 10px;
             font-weight: 600;
@@ -148,7 +148,7 @@
             justify-content: space-between;
             margin-bottom: 1rem;
         }
-        .order-total span:last-child { color: #667eea; }
+        .order-total span:last-child { color: #272D2F; }
 
         .order-actions {
             display: flex;
@@ -171,14 +171,15 @@
             justify-content: center;
             gap: 0.4rem;
         }
-        .btn-accept { background: linear-gradient(135deg, #4facfe, #00f2fe); color: white; }
-        .btn-process { background: linear-gradient(135deg, #f6d365, #fda085); color: white; }
-        .btn-ready { background: linear-gradient(135deg, #84fab0, #8fd3f4); color: white; }
-        .btn-done { background: linear-gradient(135deg, #00b894, #00a085); color: white; }
+        .btn-accept { background: linear-gradient(135deg, #FE724C, #FFC529); color: #272D2F; }
+        .btn-process { background: linear-gradient(135deg, #FFC529, #FE724C); color: #272D2F; }
+        .btn-ready { background: linear-gradient(135deg, #FFC529, #D7D7D7); color: #272D2F; }
+        .btn-done { background: linear-gradient(135deg, #FE724C, #FE724C); color: #272D2F; }
         .order-actions button:hover { transform: translateY(-2px); box-shadow: 0 6px 15px rgba(0,0,0,0.15); }
         .order-actions button:disabled {
-            background: #e1e8ff !important;
-            color: #aaa !important;
+            background: #D7D7D7 !important;
+            color: #272D2F !important;
+            border: 1px solid rgba(39,45,47,0.18);
             cursor: not-allowed;
             transform: none;
             box-shadow: none;
@@ -187,13 +188,13 @@
         .empty-state {
             text-align: center;
             padding: 4rem 2rem;
-            color: #999;
+            color: #272D2F;
             background: white;
             border-radius: 18px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
-        .empty-state i { font-size: 4rem; color: #d8e0f5; margin-bottom: 1rem; }
-        .empty-state h3 { color: #555; margin-bottom: 0.5rem; }
+        .empty-state i { font-size: 4rem; color: #272D2F; margin-bottom: 1rem; }
+        .empty-state h3 { color: #272D2F; margin-bottom: 0.5rem; }
 
         @media (max-width: 768px) {
             .main-content { padding: 2rem 1rem; }
@@ -208,7 +209,7 @@
             <a href="dashboard-tenant.html" class="logo">
                 <i class="fas fa-utensils"></i>
                 MakanYuk
-                <span style="font-size:0.7rem; background:#ffd700; color:#333; padding:0.1rem 0.6rem; border-radius:10px; margin-left:0.4rem; vertical-align:middle;">TENANT</span>
+                <span style="font-size:0.7rem; background:#FFC529; color:#272D2F; padding:0.1rem 0.6rem; border-radius:10px; margin-left:0.4rem; vertical-align:middle;">TENANT</span>
             </a>
             <ul class="nav-menu">
                 <li><span class="user-info"><i class="fas fa-store"></i> <span id="warungName">Warung</span></span></li>
@@ -319,7 +320,7 @@
                 o.myItems.forEach(it => {
                     itemsHtml += `
                         <div class="order-item-row">
-                            <span>${it.name} <span style="color:#888;">x${it.qty}</span></span>
+                            <span>${it.name} <span style="color:#272D2F;">x${it.qty}</span></span>
                             <span>${formatRupiah(it.price * it.qty)}</span>
                         </div>`;
                 });
@@ -392,9 +393,9 @@
         window.addEventListener('scroll', () => {
             const navbar = document.querySelector('.navbar');
             if (window.scrollY > 100) {
-                navbar.style.background = 'rgba(102, 126, 234, 0.95)';
+                navbar.style.background = 'rgba(254, 114, 76, 0.95)';
             } else {
-                navbar.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+                navbar.style.background = 'linear-gradient(135deg, #FE724C 0%, #FFC529 100%)';
             }
         });
     </script>

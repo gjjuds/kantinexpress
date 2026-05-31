@@ -8,8 +8,8 @@
 body {
     font-family: 'Poppins', sans-serif;
     line-height: 1.6;
-    color: #333;
-    background: #f8f9ff;
+    color: #272D2F;
+    background: #D7D7D7;
 }
 
 /* ===== Navbar ===== */
@@ -17,7 +17,7 @@ body {
     position: fixed;
     top: 0;
     width: 100%;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #FE724C 0%, #FFC529 100%);
     padding: 1rem 0;
     z-index: 1000;
     box-shadow: 0 2px 20px rgba(0,0,0,0.1);
@@ -36,12 +36,12 @@ body {
 .logo {
     font-size: 1.8rem;
     font-weight: 700;
-    color: white;
+    color: #272D2F;
     text-decoration: none;
 }
 
 .logo i {
-    color: #ffd700;
+    color: #272D2F;
     margin-right: 0.5rem;
 }
 
@@ -53,7 +53,7 @@ body {
 }
 
 .nav-link {
-    color: white;
+    color: #272D2F;
     text-decoration: none;
     font-weight: 500;
     transition: all 0.3s ease;
@@ -66,7 +66,7 @@ body {
 }
 
 .nav-link:hover {
-    color: #ffd700;
+    color: #272D2F;
     transform: translateY(-2px);
 }
 
@@ -75,8 +75,8 @@ body {
 }
 
 .cart-badge {
-    background: #ff4757;
-    color: white;
+    background: #272D2F;
+    color: #FFC529;
     border-radius: 50%;
     padding: 0.1rem 0.45rem;
     font-size: 0.75rem;
@@ -85,7 +85,7 @@ body {
 }
 
 .user-info {
-    color: white;
+    color: #272D2F;
     font-weight: 500;
     display: flex;
     align-items: center;
@@ -94,9 +94,9 @@ body {
 
 /* ===== Common Buttons ===== */
 .btn-primary {
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    color: white;
-    border: none;
+    background: linear-gradient(135deg, #FE724C, #FFC529);
+    color: #272D2F;
+    border: 1px solid #FE724C;
     padding: 0.85rem 1.8rem;
     border-radius: 12px;
     font-size: 1rem;
@@ -108,13 +108,13 @@ body {
 
 .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+    box-shadow: 0 10px 25px rgba(254, 114, 76, 0.4);
 }
 
 .btn-secondary {
-    background: #f0f1ff;
-    color: #667eea;
-    border: 2px solid #667eea;
+    background: white;
+    color: #272D2F;
+    border: 2px solid #FE724C;
     padding: 0.75rem 1.6rem;
     border-radius: 12px;
     font-weight: 600;
@@ -124,13 +124,13 @@ body {
 }
 
 .btn-secondary:hover {
-    background: #667eea;
-    color: white;
+    background: #FE724C;
+    color: #272D2F;
 }
 
 .btn-danger {
-    background: #ff4757;
-    color: white;
+    background: #FE724C;
+    color: #272D2F;
     border: none;
     padding: 0.6rem 1.2rem;
     border-radius: 10px;
@@ -141,12 +141,12 @@ body {
 }
 
 .btn-danger:hover {
-    background: #e63946;
+    background: #FE724C;
 }
 
 .btn-success {
-    background: linear-gradient(135deg, #00b894, #00a085);
-    color: white;
+    background: linear-gradient(135deg, #FE724C, #FE724C);
+    color: #272D2F;
     border: none;
     padding: 0.75rem 1.5rem;
     border-radius: 10px;
@@ -158,14 +158,14 @@ body {
 
 .btn-success:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(0, 184, 148, 0.4);
+    box-shadow: 0 8px 20px rgba(254, 114, 76, 0.4);
 }
 
 /* ===== Modal Overlay (Reusable) ===== */
 .modal-overlay {
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(30, 20, 60, 0.6);
+    background: rgba(39, 45, 47, 0.6);
     backdrop-filter: blur(5px);
     z-index: 2000;
     display: none;
@@ -191,8 +191,8 @@ body {
 }
 
 .modal-header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
+    background: linear-gradient(135deg, #FE724C 0%, #FFC529 100%);
+    color: #272D2F;
     padding: 1.5rem 2rem;
     border-radius: 20px 20px 0 0;
     display: flex;
@@ -209,9 +209,9 @@ body {
 }
 
 .modal-close {
-    background: rgba(255,255,255,0.2);
+    background: rgba(39,45,47,0.12);
     border: none;
-    color: white;
+    color: #272D2F;
     width: 36px;
     height: 36px;
     border-radius: 50%;
@@ -248,26 +248,26 @@ body {
     display: block;
     margin-bottom: 0.5rem;
     font-weight: 500;
-    color: #444;
+    color: #272D2F;
 }
 
 .form-input,
 .form-textarea {
     width: 100%;
     padding: 0.85rem 1rem;
-    border: 2px solid #e1e8ff;
+    border: 2px solid #D7D7D7;
     border-radius: 12px;
     font-size: 1rem;
     font-family: inherit;
     outline: none;
     transition: all 0.3s ease;
-    background: #f8faff;
+    background: white;
 }
 
 .form-input:focus,
 .form-textarea:focus {
-    border-color: #667eea;
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    border-color: #FE724C;
+    box-shadow: 0 0 0 3px rgba(254, 114, 76, 0.1);
     background: white;
 }
 
@@ -281,8 +281,8 @@ body {
     position: fixed;
     top: 100px;
     right: 2rem;
-    background: linear-gradient(135deg, #00b894, #00a085);
-    color: white;
+    background: linear-gradient(135deg, #FE724C, #FE724C);
+    color: #272D2F;
     padding: 1rem 1.5rem;
     border-radius: 12px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
@@ -299,7 +299,7 @@ body {
 }
 
 .toast.error {
-    background: linear-gradient(135deg, #ff4757, #e63946);
+    background: linear-gradient(135deg, #FE724C, #FE724C);
 }
 
 /* ===== Status Badges ===== */
@@ -309,14 +309,15 @@ body {
     font-size: 0.85rem;
     font-weight: 600;
     display: inline-block;
+    border: 1px solid rgba(39,45,47,0.18);
 }
 
-.status-menunggu { background: #fff3cd; color: #856404; }
-.status-diterima { background: #cce5ff; color: #004085; }
-.status-diproses { background: #ffe0b2; color: #e65100; }
-.status-siap     { background: #d4edda; color: #155724; }
-.status-pickup   { background: #e0c3fc; color: #5b21b6; }
-.status-selesai  { background: #c8e6c9; color: #1b5e20; }
+.status-menunggu { background: #FFC529; color: #272D2F; }
+.status-diterima { background: #D7D7D7; color: #272D2F; }
+.status-diproses { background: #FFC529; color: #272D2F; }
+.status-siap     { background: #D7D7D7; color: #272D2F; }
+.status-pickup   { background: #D7D7D7; color: #272D2F; }
+.status-selesai  { background: #D7D7D7; color: #272D2F; }
 
 /* ===== Responsive ===== */
 @media (max-width: 768px) {

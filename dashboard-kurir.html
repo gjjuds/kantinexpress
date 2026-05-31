@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="shared.css">
     <style>
         .page-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            background: linear-gradient(135deg, #FE724C 0%, #FFC529 100%);
+            color: #272D2F;
             padding: 2.5rem 0;
             margin-top: 80px;
         }
@@ -29,14 +29,14 @@
 
         /* On/Off Toggle */
         .toggle-wrapper {
-            background: rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.35);
             backdrop-filter: blur(10px);
             padding: 1.2rem 1.8rem;
             border-radius: 16px;
             display: flex;
             align-items: center;
             gap: 1.2rem;
-            border: 1px solid rgba(255,255,255,0.25);
+            border: 1px solid rgba(39,45,47,0.18);
         }
         .toggle-label {
             font-weight: 600;
@@ -49,12 +49,12 @@
             position: relative;
             width: 70px;
             height: 36px;
-            background: rgba(255,255,255,0.25);
+            background: rgba(39,45,47,0.18);
             border-radius: 36px;
             cursor: pointer;
             transition: background 0.3s;
         }
-        .toggle-switch.on { background: #00b894; }
+        .toggle-switch.on { background: #FE724C; }
         .toggle-slider {
             position: absolute;
             top: 4px;
@@ -71,11 +71,11 @@
         }
         .toggle-switch.on .toggle-slider { transform: translateX(34px); }
         .toggle-slider i {
-            color: #667eea;
+            color: #272D2F;
             font-size: 0.8rem;
         }
         .toggle-switch.on .toggle-slider i {
-            color: #00b894;
+            color: #272D2F;
         }
 
         .stats-row {
@@ -84,11 +84,11 @@
             flex-wrap: wrap;
         }
         .stat-card {
-            background: rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.35);
             padding: 0.8rem 1.2rem;
             border-radius: 12px;
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
+            border: 1px solid rgba(39,45,47,0.18);
             min-width: 110px;
         }
         .stat-value { font-size: 1.6rem; font-weight: 700; }
@@ -106,15 +106,15 @@
             gap: 0.8rem;
             margin-bottom: 1.5rem;
             font-size: 1.4rem;
-            color: #333;
+            color: #272D2F;
             font-weight: 600;
         }
-        .section-heading i { color: #667eea; }
+        .section-heading i { color: #272D2F; }
 
         /* Off State Notice */
         .off-notice {
-            background: linear-gradient(135deg, #ffe5e8, #fff3cd);
-            border-left: 4px solid #ff6b6b;
+            background: linear-gradient(135deg, #D7D7D7, #FFC529);
+            border-left: 4px solid #FE724C;
             padding: 1.5rem;
             border-radius: 14px;
             margin-bottom: 2rem;
@@ -122,9 +122,9 @@
             align-items: center;
             gap: 1rem;
         }
-        .off-notice i { font-size: 2rem; color: #ff6b6b; }
-        .off-notice h3 { color: #333; margin-bottom: 0.2rem; }
-        .off-notice p { color: #666; font-size: 0.92rem; }
+        .off-notice i { font-size: 2rem; color: #272D2F; }
+        .off-notice h3 { color: #272D2F; margin-bottom: 0.2rem; }
+        .off-notice p { color: #272D2F; font-size: 0.92rem; }
 
         /* Pickup Cards */
         .pickup-grid {
@@ -140,53 +140,53 @@
             transition: all 0.3s;
             position: relative;
         }
-        .pickup-card:hover { transform: translateY(-5px); box-shadow: 0 20px 50px rgba(255,107,107,0.18); }
+        .pickup-card:hover { transform: translateY(-5px); box-shadow: 0 20px 50px rgba(254,114,76,0.18); }
         .pickup-card::before {
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0;
             height: 5px;
-            background: linear-gradient(90deg, #ff6b6b, #ffd93d);
+            background: linear-gradient(90deg, #FE724C, #FFC529);
         }
         .pickup-header {
             padding: 1.2rem 1.5rem;
-            border-bottom: 1px solid #f0f1ff;
+            border-bottom: 1px solid #D7D7D7;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
             gap: 0.5rem;
         }
-        .pickup-id { font-weight: 700; color: #ff6b6b; font-size: 1.05rem; }
-        .pickup-time { font-size: 0.82rem; color: #888; }
+        .pickup-id { font-weight: 700; color: #272D2F; font-size: 1.05rem; }
+        .pickup-time { font-size: 0.82rem; color: #272D2F; }
 
         .pickup-body { padding: 1.2rem 1.5rem; }
 
         .pickup-customer {
-            background: #f8faff;
+            background: #D7D7D7;
             padding: 1rem 1.2rem;
             border-radius: 12px;
             margin-bottom: 1rem;
-            border-left: 4px solid #667eea;
+            border-left: 4px solid #FE724C;
         }
         .pickup-customer h4 {
-            color: #667eea;
+            color: #272D2F;
             font-size: 0.9rem;
             margin-bottom: 0.5rem;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
         .pickup-customer div { padding: 0.2rem 0; font-size: 0.92rem; }
-        .pickup-customer i { width: 20px; color: #667eea; }
+        .pickup-customer i { width: 20px; color: #272D2F; }
 
         .pickup-warungs {
-            background: linear-gradient(135deg, #f0f4ff, #faf5ff);
+            background: linear-gradient(135deg, #D7D7D7, #D7D7D7);
             padding: 1rem 1.2rem;
             border-radius: 12px;
             margin-bottom: 1rem;
         }
         .pickup-warungs h4 {
-            color: #764ba2;
+            color: #272D2F;
             font-size: 0.9rem;
             margin-bottom: 0.5rem;
             text-transform: uppercase;
@@ -194,13 +194,13 @@
         }
         .warung-pickup-item {
             padding: 0.5rem 0;
-            border-bottom: 1px dashed #d8e0f5;
+            border-bottom: 1px dashed #D7D7D7;
         }
         .warung-pickup-item:last-child { border-bottom: none; }
-        .warung-pickup-name { font-weight: 600; color: #333; font-size: 0.95rem; }
+        .warung-pickup-name { font-weight: 600; color: #272D2F; font-size: 0.95rem; }
         .warung-pickup-items {
             font-size: 0.85rem;
-            color: #666;
+            color: #272D2F;
             margin-top: 0.2rem;
             padding-left: 1rem;
         }
@@ -209,12 +209,12 @@
             display: flex;
             justify-content: space-between;
             padding: 0.7rem 1rem;
-            background: #f8faff;
+            background: #D7D7D7;
             border-radius: 10px;
             font-weight: 600;
             margin-bottom: 1rem;
         }
-        .pickup-total span:last-child { color: #667eea; }
+        .pickup-total span:last-child { color: #272D2F; }
 
         .pickup-actions {
             display: flex;
@@ -235,12 +235,13 @@
             justify-content: center;
             gap: 0.4rem;
         }
-        .btn-pickup { background: linear-gradient(135deg, #ff6b6b, #ffd93d); color: white; }
-        .btn-delivered { background: linear-gradient(135deg, #00b894, #00a085); color: white; }
+        .btn-pickup { background: linear-gradient(135deg, #FE724C, #FFC529); color: #272D2F; }
+        .btn-delivered { background: linear-gradient(135deg, #FE724C, #FE724C); color: #272D2F; }
         .pickup-actions button:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
         .pickup-actions button:disabled {
-            background: #e1e8ff !important;
-            color: #aaa !important;
+            background: #D7D7D7 !important;
+            color: #272D2F !important;
+            border: 1px solid rgba(39,45,47,0.18);
             cursor: not-allowed;
             transform: none;
             box-shadow: none;
@@ -256,13 +257,13 @@
         .empty-state {
             text-align: center;
             padding: 4rem 2rem;
-            color: #999;
+            color: #272D2F;
             background: white;
             border-radius: 18px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
-        .empty-state i { font-size: 4rem; color: #d8e0f5; margin-bottom: 1rem; }
-        .empty-state h3 { color: #555; margin-bottom: 0.5rem; }
+        .empty-state i { font-size: 4rem; color: #272D2F; margin-bottom: 1rem; }
+        .empty-state h3 { color: #272D2F; margin-bottom: 0.5rem; }
 
         @media (max-width: 768px) {
             .main-content { padding: 2rem 1rem; }
@@ -277,7 +278,7 @@
             <a href="dashboard-kurir.html" class="logo">
                 <i class="fas fa-utensils"></i>
                 MakanYuk
-                <span style="font-size:0.7rem; background:#ffd700; color:#333; padding:0.1rem 0.6rem; border-radius:10px; margin-left:0.4rem; vertical-align:middle;">KURIR</span>
+                <span style="font-size:0.7rem; background:#FFC529; color:#272D2F; padding:0.1rem 0.6rem; border-radius:10px; margin-left:0.4rem; vertical-align:middle;">KURIR</span>
             </a>
             <ul class="nav-menu">
                 <li><span class="user-info"><i class="fas fa-motorcycle"></i> <span id="kurirName">Kurir</span></span></li>
@@ -428,7 +429,7 @@
                     const itemsList = g.items.map(it => `${it.name} (x${it.qty})`).join(', ');
                     warungsHtml += `
                         <div class="warung-pickup-item">
-                            <div class="warung-pickup-name"><i class="fas fa-store" style="color:#764ba2;"></i> ${g.name}</div>
+                            <div class="warung-pickup-name"><i class="fas fa-store" style="color:#272D2F;"></i> ${g.name}</div>
                             <div class="warung-pickup-items">${itemsList}</div>
                         </div>`;
                 });
@@ -496,9 +497,9 @@
         window.addEventListener('scroll', () => {
             const navbar = document.querySelector('.navbar');
             if (window.scrollY > 100) {
-                navbar.style.background = 'rgba(102, 126, 234, 0.95)';
+                navbar.style.background = 'rgba(254, 114, 76, 0.95)';
             } else {
-                navbar.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+                navbar.style.background = 'linear-gradient(135deg, #FE724C 0%, #FFC529 100%)';
             }
         });
     </script>

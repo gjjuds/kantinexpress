@@ -12,12 +12,12 @@
         /* Hero Section */
         .hero {
             height: 100vh;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background: white;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            color: white;
+            color: #272D2F;
             position: relative;
             overflow: hidden;
         }
@@ -55,21 +55,21 @@
         }
         .cta-button {
             display: inline-block;
-            background: linear-gradient(45deg, #ff6b6b, #ffd93d);
-            color: white;
+            background: linear-gradient(45deg, #FE724C, #FFC529);
+            color: #272D2F;
             padding: 1.2rem 3rem;
             border-radius: 50px;
             text-decoration: none;
             font-weight: 600;
             font-size: 1.1rem;
             transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(255,107,107,0.4);
+            box-shadow: 0 10px 30px rgba(254,114,76,0.4);
             position: relative;
             overflow: hidden;
         }
         .cta-button:hover {
             transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(255,107,107,0.6);
+            box-shadow: 0 20px 40px rgba(254,114,76,0.6);
         }
         .cta-button::before {
             content: '';
@@ -84,7 +84,7 @@
         /* Features Section */
         .features {
             padding: 5rem 0;
-            background: #f8f9ff;
+            background: linear-gradient(135deg, #FE724C 0%, #FFC529 100%);
         }
         .container {
             max-width: 1200px;
@@ -95,7 +95,7 @@
             text-align: center;
             font-size: 2.5rem;
             margin-bottom: 4rem;
-            color: #333;
+            color: #272D2F;
         }
         .features-grid {
             display: grid;
@@ -117,7 +117,7 @@
             position: absolute;
             top: 0; left: 0; right: 0;
             height: 5px;
-            background: linear-gradient(90deg, #667eea, #764ba2);
+            background: linear-gradient(90deg, #FE724C, #FFC529);
         }
         .feature-card:hover {
             transform: translateY(-10px);
@@ -125,13 +125,13 @@
         }
         .feature-icon {
             font-size: 3rem;
-            color: #667eea;
+            color: #272D2F;
             margin-bottom: 1.5rem;
         }
         .feature-card h3 {
             font-size: 1.5rem;
             margin-bottom: 1rem;
-            color: #333;
+            color: #272D2F;
         }
 
         @media (max-width: 768px) {
@@ -163,7 +163,7 @@
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="hero-content">
-            <h1>MakanYuk <br> <span style="color: #ffd700;">Lebih Cepat & Praktis!</span></h1>
+            <h1>MakanYuk <br> <span style="color: #272D2F;">Lebih Cepat & Praktis!</span></h1>
             <p>Pesan makanan favoritmu sekarang dan ambil tanpa antri. Tinggal KLIK , PESAN , BAYAR</p>
             <a href="pesan.html" class="cta-button">
                 <i class="fas fa-bolt"></i> Mulai Pesan Sekarang
@@ -206,9 +206,9 @@
         window.addEventListener('scroll', () => {
             const navbar = document.querySelector('.navbar');
             if (window.scrollY > 100) {
-                navbar.style.background = 'rgba(102, 126, 234, 0.95)';
+                navbar.style.background = 'rgba(254, 114, 76, 0.95)';
             } else {
-                navbar.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+                navbar.style.background = 'linear-gradient(135deg, #FE724C 0%, #FFC529 100%)';
             }
         });
     </script>
