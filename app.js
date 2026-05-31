@@ -9,6 +9,39 @@ const USERS = [
     { username: 'kurir',     password: '123', role: 'kurir',    name: 'Andi Kurir' },
 ];
 
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.nav-toggle').forEach(toggle => {
+        const menu = toggle.closest('.nav-container')?.querySelector('.nav-menu');
+        if (!menu) return;
+
+        toggle.addEventListener('click', (event) => {
+            event.stopPropagation();
+            const isOpen = menu.classList.toggle('open');
+            toggle.setAttribute('aria-expanded', String(isOpen));
+            toggle.innerHTML = isOpen ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+
+        menu.querySelectorAll('a, button').forEach(item => {
+            item.addEventListener('click', () => {
+                menu.classList.remove('open');
+                toggle.setAttribute('aria-expanded', 'false');
+                toggle.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+    });
+
+    document.addEventListener('click', (event) => {
+        document.querySelectorAll('.nav-menu.open').forEach(menu => {
+            const container = menu.closest('.nav-container');
+            if (container?.contains(event.target)) return;
+            const toggle = container?.querySelector('.nav-toggle');
+            menu.classList.remove('open');
+            toggle?.setAttribute('aria-expanded', 'false');
+            if (toggle) toggle.innerHTML = '<i class="fas fa-bars"></i>';
+        });
+    });
+});
+
 /* ---------- Warung & Menu Data ---------- */
 const WARUNG_DATA = [
     {
